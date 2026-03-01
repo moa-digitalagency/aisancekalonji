@@ -40,6 +40,43 @@ def create_app():
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
+    # Register error handlers
+    from models.setting import GlobalSetting
+
+    def get_whatsapp_number():
+        try:
+            whatsapp_setting = GlobalSetting.query.filter_by(key='whatsapp').first()
+            number = whatsapp_setting.value if whatsapp_setting and whatsapp_setting.value else os.environ.get('WHATSAPP_NUMBER', '243860493345')
+            # Nettoyer le numéro pour le lien wa.me (retirer espaces, +, etc.)
+            clean_number = ''.join(filter(str.isdigit, number))
+            return clean_number if clean_number else '243860493345'
+        except Exception as e:
+            # Fallback in case of database error to prevent cascading 500 errors
+            number = os.environ.get('WHATSAPP_NUMBER', '243860493345')
+            clean_number = ''.join(filter(str.isdigit, number))
+            return clean_number if clean_number else '243860493345'
+
+
+    @app.errorhandler(400)
+    def bad_request_error(error):
+        return render_template('400.html'), 400
+
+    @app.errorhandler(403)
+    def forbidden_error(error):
+        return render_template('403.html', whatsapp_number=get_whatsapp_number()), 403
+
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return render_template('404.html', whatsapp_number=get_whatsapp_number()), 404
+
+    @app.errorhandler(451)
+    def unavailable_for_legal_reasons_error(error):
+        return render_template('451.html'), 451
+
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return render_template('500.html'), 500
+
     return app
 
 if __name__ == '__main__':
