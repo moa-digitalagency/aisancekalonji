@@ -31,7 +31,7 @@
             </div>
             <div>
                 <p class="mb-2 text-sm font-medium text-gray-600">Images Uploadées</p>
-                <p class="text-3xl font-bold text-gray-800">--</p>
+                <p class="text-3xl font-bold text-gray-800">{{ uploaded_images_count }}</p>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@
             <h4 class="font-medium text-indigo-600 mb-1">Gérer le Portfolio &rarr;</h4>
             <p class="text-sm text-gray-500">Ajouter ou modifier vos projets récents.</p>
         </a>
-        <a href="#" class="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-150">
+        <a href="{{ url_for('admin.images') }}" class="block p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-150">
             <h4 class="font-medium text-green-600 mb-1">Mettre à jour les Images &rarr;</h4>
             <p class="text-sm text-gray-500">Modifier les images de la page d'accueil.</p>
         </a>
