@@ -10,6 +10,21 @@ from models.base import db
 
 admin_bp = Blueprint('admin', __name__)
 
+def update_json_field(current_value, new_value_fr):
+    """
+    Updates a JSON field with a new French value.
+    If current_value is None or not a dict, initializes it as a dict.
+    Preserves other language keys if they exist.
+    """
+    if not isinstance(current_value, dict):
+        current_value = {}
+
+    # We update the 'fr' key specifically as the admin interface is in French
+    if new_value_fr is not None:
+        current_value['fr'] = new_value_fr
+
+    return current_value
+
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -100,12 +115,15 @@ def portfolio():
 @login_required
 def portfolio_add():
     if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
+        title_fr = request.form.get('title')
+        description_fr = request.form.get('description')
         link = request.form.get('link')
         icon_class = request.form.get('icon_class')
         color_class = request.form.get('color_class')
         is_active = request.form.get('is_active') == 'on'
+
+        title = update_json_field({}, title_fr) if title_fr else {}
+        description = update_json_field({}, description_fr) if description_fr else {}
 
         try:
             new_item = PortfolioItem(
@@ -132,8 +150,15 @@ def portfolio_edit(id):
     item = PortfolioItem.query.get_or_404(id)
 
     if request.method == 'POST':
-        item.title = request.form.get('title')
-        item.description = request.form.get('description')
+        title_fr = request.form.get('title')
+        description_fr = request.form.get('description')
+
+        # SQLAlchemy requires assigning a new dictionary object to detect the change on JSON columns
+        if title_fr is not None:
+            item.title = update_json_field(dict(item.title) if item.title else {}, title_fr)
+        if description_fr is not None:
+            item.description = update_json_field(dict(item.description) if item.description else {}, description_fr)
+
         item.link = request.form.get('link')
         item.icon_class = request.form.get('icon_class')
         item.color_class = request.form.get('color_class')
@@ -194,11 +219,21 @@ def book():
         book_section = None
 
     if request.method == 'POST' and book_section:
-        book_section.title = request.form.get('title')
-        book_section.subtitle = request.form.get('subtitle')
-        book_section.description = request.form.get('description')
+        title_fr = request.form.get('title')
+        subtitle_fr = request.form.get('subtitle')
+        description_fr = request.form.get('description')
+        cta_text_fr = request.form.get('cta_text')
+
+        if title_fr is not None:
+            book_section.title = update_json_field(dict(book_section.title) if book_section.title else {}, title_fr)
+        if subtitle_fr is not None:
+            book_section.subtitle = update_json_field(dict(book_section.subtitle) if book_section.subtitle else {}, subtitle_fr)
+        if description_fr is not None:
+            book_section.description = update_json_field(dict(book_section.description) if book_section.description else {}, description_fr)
+        if cta_text_fr is not None:
+            book_section.cta_text = update_json_field(dict(book_section.cta_text) if book_section.cta_text else {}, cta_text_fr)
+
         book_section.cta_link = request.form.get('cta_link')
-        book_section.cta_text = request.form.get('cta_text')
 
         try:
             db.session.commit()
@@ -225,8 +260,14 @@ def seo():
         seo_setting = None
 
     if request.method == 'POST' and seo_setting:
-        seo_setting.meta_title = request.form.get('meta_title')
-        seo_setting.meta_description = request.form.get('meta_description')
+        meta_title_fr = request.form.get('meta_title')
+        meta_description_fr = request.form.get('meta_description')
+
+        if meta_title_fr is not None:
+            seo_setting.meta_title = update_json_field(dict(seo_setting.meta_title) if seo_setting.meta_title else {}, meta_title_fr)
+        if meta_description_fr is not None:
+            seo_setting.meta_description = update_json_field(dict(seo_setting.meta_description) if seo_setting.meta_description else {}, meta_description_fr)
+
         seo_setting.custom_head_script = request.form.get('custom_head_script')
         seo_setting.og_image = request.form.get('og_image')
 
