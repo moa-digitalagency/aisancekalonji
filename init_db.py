@@ -1,12 +1,14 @@
 import os
 from flask import Flask
 from werkzeug.security import generate_password_hash
+from dotenv import load_dotenv
 from models.base import db
 
 # Import models so SQLAlchemy knows about them
 import models
 
 def init_db():
+    load_dotenv()
     app = Flask(__name__)
 
     # Configure the PostgreSQL database URI
@@ -30,8 +32,14 @@ def init_db():
 
         # Create admin user if it doesn't exist
         print("Checking admin user...")
-        admin_username = os.environ.get('ADMIN_USERNAME', 'admin')
-        admin_password = os.environ.get('ADMIN_PASSWORD', 'admin123')
+        admin_username = os.environ.get('ADMIN_USERNAME')
+        admin_password = os.environ.get('ADMIN_PASSWORD')
+
+        if not admin_username or not admin_password:
+            print("WARNING: ADMIN_USERNAME or ADMIN_PASSWORD not found in environment variables.")
+            print("Falling back to default credentials. Please change them immediately in production.")
+            admin_username = admin_username or 'admin'
+            admin_password = admin_password or 'admin123'
 
         admin_user = models.AdminUser.query.filter_by(username=admin_username).first()
         if not admin_user:
@@ -89,6 +97,21 @@ def init_db():
             )
             db.session.add(new_book)
             db.session.commit()
+
+        # Pre-fill GlobalSetting default values
+        print("Checking default global settings...")
+        default_global_settings = {
+            'logo_type': 'text',
+            'logo_text': 'Aisance KALONJI',
+            'logo_image_url': '',
+            'favicon_url': ''
+        }
+
+        for key, value in default_global_settings.items():
+            if not models.GlobalSetting.query.filter_by(key=key).first():
+                new_setting = models.GlobalSetting(key=key, value=value)
+                db.session.add(new_setting)
+        db.session.commit()
 
         print("Database seeding completed.")
 
