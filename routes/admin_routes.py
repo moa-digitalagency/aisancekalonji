@@ -46,6 +46,17 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def handle_secure_upload(file):
+    if file and file.filename != '':
+        if allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            upload_folder = os.path.join(current_app.static_folder, 'uploads')
+            os.makedirs(upload_folder, exist_ok=True)
+            file_path = os.path.join(upload_folder, filename)
+            file.save(file_path)
+            return f"uploads/{filename}"
+    return None
+
 @admin_bp.route('/images', methods=['GET', 'POST'])
 @login_required
 def images():
@@ -58,18 +69,13 @@ def images():
                 url = request.form.get(image.section_name + '_url')
 
                 if file and file.filename != '':
-                    if allowed_file(file.filename):
-                        filename = secure_filename(file.filename)
-                        upload_folder = os.path.join(current_app.static_folder, 'uploads')
-                        os.makedirs(upload_folder, exist_ok=True)
-                        file_path = os.path.join(upload_folder, filename)
-                        file.save(file_path)
-
-                        image.upload_path = f"uploads/{filename}"
+                    upload_path = handle_secure_upload(file)
+                    if upload_path:
+                        image.upload_path = upload_path
                         image.is_uploaded = True
                         image.image_url = None
                     else:
-                        flash(f'Format de fichier non autorisé pour {image.section_name}.', 'error')
+                        flash(f'Format de fichier non autorisé ou fichier invalide pour {image.section_name}.', 'error')
                 elif url and url.strip() != '':
                     image.image_url = url.strip()
                     image.is_uploaded = False
@@ -176,13 +182,18 @@ from models.setting import SeoSetting, GlobalSetting
 @admin_bp.route('/book', methods=['GET', 'POST'])
 @login_required
 def book():
-    book_section = BookSection.query.first()
-    if not book_section:
-        book_section = BookSection()
-        db.session.add(book_section)
-        db.session.commit()
+    try:
+        book_section = BookSection.query.first()
+        if not book_section:
+            book_section = BookSection()
+            db.session.add(book_section)
+            db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Erreur d'initialisation de la base de données : {str(e)}", 'error')
+        book_section = None
 
-    if request.method == 'POST':
+    if request.method == 'POST' and book_section:
         book_section.title = request.form.get('title')
         book_section.subtitle = request.form.get('subtitle')
         book_section.description = request.form.get('description')
@@ -202,13 +213,18 @@ def book():
 @admin_bp.route('/seo', methods=['GET', 'POST'])
 @login_required
 def seo():
-    seo_setting = SeoSetting.query.first()
-    if not seo_setting:
-        seo_setting = SeoSetting()
-        db.session.add(seo_setting)
-        db.session.commit()
+    try:
+        seo_setting = SeoSetting.query.first()
+        if not seo_setting:
+            seo_setting = SeoSetting()
+            db.session.add(seo_setting)
+            db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Erreur d'initialisation de la base de données : {str(e)}", 'error')
+        seo_setting = None
 
-    if request.method == 'POST':
+    if request.method == 'POST' and seo_setting:
         seo_setting.meta_title = request.form.get('meta_title')
         seo_setting.meta_description = request.form.get('meta_description')
         seo_setting.custom_head_script = request.form.get('custom_head_script')
@@ -246,40 +262,31 @@ def settings():
                         db.session.add(new_setting)
 
             # Handle file uploads for logo and favicon
-            upload_folder = os.path.join(current_app.static_folder, 'uploads')
-            os.makedirs(upload_folder, exist_ok=True)
-
             logo_file = request.files.get('logo_image')
             if logo_file and logo_file.filename != '':
-                if allowed_file(logo_file.filename):
-                    filename = secure_filename(logo_file.filename)
-                    file_path = os.path.join(upload_folder, filename)
-                    logo_file.save(file_path)
-
+                upload_path = handle_secure_upload(logo_file)
+                if upload_path:
                     logo_setting = GlobalSetting.query.filter_by(key='logo_image_url').first()
                     if logo_setting:
-                        logo_setting.value = f"uploads/{filename}"
+                        logo_setting.value = upload_path
                     else:
-                        new_logo_setting = GlobalSetting(key='logo_image_url', value=f"uploads/{filename}")
+                        new_logo_setting = GlobalSetting(key='logo_image_url', value=upload_path)
                         db.session.add(new_logo_setting)
                 else:
-                    flash('Format de fichier non autorisé pour le Logo.', 'error')
+                    flash('Format de fichier non autorisé ou fichier invalide pour le Logo.', 'error')
 
             favicon_file = request.files.get('favicon_image')
             if favicon_file and favicon_file.filename != '':
-                if allowed_file(favicon_file.filename):
-                    filename = secure_filename(favicon_file.filename)
-                    file_path = os.path.join(upload_folder, filename)
-                    favicon_file.save(file_path)
-
+                upload_path = handle_secure_upload(favicon_file)
+                if upload_path:
                     favicon_setting = GlobalSetting.query.filter_by(key='favicon_url').first()
                     if favicon_setting:
-                        favicon_setting.value = f"uploads/{filename}"
+                        favicon_setting.value = upload_path
                     else:
-                        new_favicon_setting = GlobalSetting(key='favicon_url', value=f"uploads/{filename}")
+                        new_favicon_setting = GlobalSetting(key='favicon_url', value=upload_path)
                         db.session.add(new_favicon_setting)
                 else:
-                    flash('Format de fichier non autorisé pour le Favicon.', 'error')
+                    flash('Format de fichier non autorisé ou fichier invalide pour le Favicon.', 'error')
 
             db.session.commit()
             flash('Paramètres globaux mis à jour avec succès.', 'success')
