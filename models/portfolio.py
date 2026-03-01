@@ -4,8 +4,8 @@ class PortfolioItem(db.Model):
     __tablename__ = 'portfolio_items'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable=False)
-    description = db.Column(db.Text, nullable=True)
+    title = db.Column(db.JSON, nullable=False)
+    description = db.Column(db.JSON, nullable=True)
     link = db.Column(db.String(500), nullable=True)
     icon_class = db.Column(db.String(100), nullable=True)
     color_class = db.Column(db.String(100), nullable=True)
