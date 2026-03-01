@@ -9,9 +9,20 @@ os.environ['DATABASE_URL'] = 'sqlite:///test_app.db'
 app = Flask(__name__, template_folder='templates', static_folder='statics')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'dev'
 
 db.init_app(app)
 app.register_blueprint(main_bp)
+
+from utils.i18n import get_translation
+from flask import session
+
+@app.context_processor
+def inject_lang():
+    lang = session.get('lang', 'fr')
+    def t(key):
+        return get_translation(lang, key)
+    return dict(current_lang=lang, t=t)
 
 # Initialize and seed database
 with app.app_context():

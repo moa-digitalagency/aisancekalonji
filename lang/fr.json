@@ -1,0 +1,68 @@
+{
+  "navbar": {
+    "vision": "Vision",
+    "expertise": "Expertise",
+    "experiences": "Expériences",
+    "realisations": "Réalisations",
+    "book_consultation": "Réserver une consultation"
+  },
+  "hero": {
+    "ceo": "CEO",
+    "lacyberconfiance": "LaCyberConfiance",
+    "ia_consultant": "Consultant IA",
+    "exp_years": "15+",
+    "exp_text": "Ans Exp.",
+    "designer": "Designer",
+    "locations": "Marrakech · Kinshasa · Canada · USA",
+    "title_part1": "Façonner l'avenir",
+    "title_part2": "numérique africain.",
+    "subtitle": "15 années d'expertise. Consultant en <strong>Transformation Digitale</strong>, <strong>Intelligence Artificielle</strong> et <strong>Cybersécurité</strong>, je conçois des écosystèmes technologiques résilients pour les entreprises ambitieuses.",
+    "btn_experiences": "Voir mes expériences",
+    "btn_expertise": "Mon expertise"
+  },
+  "vision": {
+    "title": "Un pont",
+    "title_light": "technologique.",
+    "p1": "Entrepreneur d'origine congolaise installé à Marrakech, j'agis comme un acteur d'innovation entre <strong>l'Afrique Centrale et le Maghreb.</strong> Fort de plus de 15 ans d'expérience, je déploie une vision technologique panafricaine qui connecte la RDC et le Maroc à des marchés tels que le Sénégal, le Gabon et l'Afrique du Sud.",
+    "p2": "Mon parcours pluridisciplinaire, alliant les sciences fondamentales à l'ingénierie NTIC, me permet de concevoir des écosystèmes complets. À travers Shabaka InnovLab et MOA Digital Agency, j'accompagne les entreprises dans leur transformation numérique 360°, de l'automatisation à l'intégration domotique.",
+    "p3": "Aujourd'hui, ma mission se déploie à travers la sensibilisation à l'hygiène numérique (LaCyberConfiance) et la recherche en Intelligence Artificielle (Shabaka InnovLab). Un engagement pour bâtir une souveraineté technologique forte et résiliente.",
+    "rd_ia": "R&D / IA",
+    "shabaka": "Shabaka InnovLab",
+    "cybersecurity": "Cybersécurité",
+    "entrepreneurship": "Entrepreneuriat",
+    "incubator": "Incubateur & Mentoring",
+    "social_projects": "Projets Sociaux",
+    "initiatives": "Initiatives & Communauté",
+    "direction_360": "Direction Digitale 360°",
+    "direction_360_desc": "Shabaka InnovLab et MOA Digital Agency"
+  },
+  "expertise": {
+    "title": "Domaines d'",
+    "title_light": "expertise.",
+    "subtitle": "Des solutions complètes allant de la sécurisation des infrastructures à la création d'agents autonomes, en passant par le design d'interfaces.",
+    "ai_data_title": "Intelligence Artificielle & Data",
+    "ai_data_desc": "Intégration de modèles LLM, conception d'architectures RAG et développement d'agents IA autonomes. Optimisation des processus métiers via des automatisations No-Code et des algorithmes Python. Prise de décision basée sur des métriques (Data-driven).",
+    "ai_tags": ["LLM / RAG", "Agents Autonomes", "No-Code", "Data-driven"],
+    "cyber_cloud_title": "Cyber & Cloud",
+    "cyber_cloud_desc": "Audits de sécurité, hygiène numérique en entreprise, OSINT (recherche de sources ouvertes) et maîtrise des infrastructures cloud.",
+    "cyber_tags": ["AWS CLF-C02", "Hygiène Num.", "ISO 9001:2015"],
+    "fullstack_design_title": "Fullstack & Design Web",
+    "fullstack_design_desc": "Architecture web/mobile, identité visuelle, UI/UX, plateformes e-commerce et visualisation 3D.",
+    "fullstack_tags": ["UI / UX Design", "Python/Flask", "Tailwind", "E-commerce"],
+    "strategy_title": "Stratégie 360°, Marketing & Direction",
+    "strategy_desc": "Gestion de projets NTIC, intégration domotique, SEO, Google Search Console, et prospection B2B. Direction d'agence (MOA), accompagnement de startups en incubateur et formation.",
+    "strategy_tags": ["SEO & Ads", "Prospection", "Domotique", "Formation"]
+  },
+  "footer": {
+    "title": "Une idée ? Un projet ?",
+    "title_light": "Discutons-en.",
+    "btn_consultation": "Consultation gratuite",
+    "location_title": "Localisation",
+    "location_1": "Marrakech, Maroc",
+    "location_2": "Kinshasa, RDC",
+    "platforms_title": "Plateformes",
+    "legal_title": "Légal",
+    "rights": "Tous droits réservés.",
+    "made_with": "Fait avec ☕️ et ❤️ Par InnovLab."
+  }
+}
