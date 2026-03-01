@@ -1,6 +1,7 @@
 from models.base import db
+from flask_login import UserMixin
 
-class AdminUser(db.Model):
+class AdminUser(db.Model, UserMixin):
     __tablename__ = 'admin_users'
 
     id = db.Column(db.Integer, primary_key=True)

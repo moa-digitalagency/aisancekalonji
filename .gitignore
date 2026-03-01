@@ -4,3 +4,5 @@ venv/
 env/
 .env
 .pytest_cache/
+server_log.txt
+aisancekalonji.db
