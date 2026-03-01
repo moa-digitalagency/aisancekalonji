@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ seo.custom_head_script | safe if seo and seo.custom_head_script else '' }}
     <title>{{ seo.meta_title if seo and seo.meta_title else 'Aisance KALONJI | Consultant IA & Cybersécurité' }}</title>
+    {% if settings.get('favicon_url') %}
+    <link rel="icon" href="{{ settings.get('favicon_url') }}">
+    {% else %}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% endif %}
     {% if seo and seo.meta_description %}<meta name="description" content="{{ seo.meta_description }}">{% endif %}
 
     <!-- Polices Premium -->
@@ -70,9 +75,18 @@
         <div class="relative w-full max-w-7xl mx-auto">
             <div class="glass-premium px-6 py-4 rounded-full flex items-center justify-between relative z-20">
                 <a href="#" class="flex-shrink-0 transition-transform hover:scale-105">
-                    <div class="font-display text-lg md:text-xl tracking-widest uppercase text-adaptive">
-                        <span class="font-normal">Aisance</span> <span class="font-black">KALONJI</span>
-                    </div>
+                    {% if settings.get('logo_type') == 'image' and settings.get('logo_image_url') %}
+                        <img src="{{ settings.get('logo_image_url') }}" alt="Logo" class="h-8 w-auto object-contain">
+                    {% else %}
+                        <div class="font-display text-lg md:text-xl tracking-widest uppercase text-adaptive">
+                            {% set l_text = settings.get('logo_text') | default('Aisance KALONJI') %}
+                            {% set parts = l_text.split(' ', 1) %}
+                            <span class="font-normal">{{ parts[0] }}</span>
+                            {% if parts | length > 1 %}
+                            <span class="font-black"> {{ parts[1] }}</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
                 </a>
 
                 <!-- Liens Desktop -->
