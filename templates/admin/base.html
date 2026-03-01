@@ -4,98 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administration - Aisance Kalonji</title>
+
+    <!-- Polices Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class', // Activation du mode sombre manuel
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
                     colors: {
-                        primary: '#1a202c',
-                        secondary: '#2d3748',
-                        accent: '#4a5568',
+                        accent: '#3b82f6',
                     }
                 }
             }
         }
     </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        /* Surcharge pour le panel d'admin afin d'améliorer la lisibilité */
+        .admin-content h1, .admin-content h2, .admin-content h3 { color: var(--text-main); }
+        .admin-content p { color: var(--text-muted); }
+        .admin-content input, .admin-content textarea, .admin-content select {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-main);
+        }
+        .dark .admin-content input, .dark .admin-content textarea, .dark .admin-content select {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+        /* Style des tableaux */
+        .admin-table th { background: rgba(0,0,0,0.1); color: var(--text-main); }
+        .admin-table td { border-bottom: 1px solid var(--glass-border); color: var(--text-muted); }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans leading-normal tracking-normal text-gray-900 h-screen flex overflow-hidden">
+<body class="antialiased dark h-screen flex overflow-hidden relative">
+
+    <!-- ARRIÈRE-PLAN ANIMÉ -->
+    <div class="blob-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-primary text-white flex flex-col h-full shadow-lg z-20 transition-transform duration-300 transform -translate-x-full md:translate-x-0 fixed md:relative" id="sidebar">
-        <div class="p-6 border-b border-secondary flex justify-between items-center">
-            <h1 class="text-2xl font-semibold uppercase tracking-wider">Admin Panel</h1>
-            <button class="md:hidden text-gray-300 hover:text-white" onclick="toggleSidebar()">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <aside class="w-64 glass-premium flex flex-col h-full z-30 transition-transform duration-300 transform -translate-x-full md:translate-x-0 fixed md:relative border-r border-[var(--glass-border)]" id="sidebar" style="background: var(--glass-bg);">
+        <div class="p-6 border-b border-[var(--glass-border)] flex justify-between items-center">
+            <h1 class="font-display text-xl font-bold uppercase tracking-wider text-adaptive">Admin Panel</h1>
+            <button class="md:hidden text-adaptive-muted hover:text-adaptive" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
             </button>
         </div>
-        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
-            <a href="{{ url_for('admin.dashboard') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.dashboard' %}bg-secondary text-white{% endif %}">
-                Dashboard
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto font-sans text-sm">
+            <a href="{{ url_for('admin.dashboard') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint == 'admin.dashboard' %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-tachometer-alt w-5 mr-2"></i> Dashboard
             </a>
-            <a href="{{ url_for('admin.images') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.images' %}bg-secondary text-white{% endif %}">
-                Images
+            <a href="{{ url_for('admin.images') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint == 'admin.images' %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-images w-5 mr-2"></i> Images
             </a>
-            <a href="{{ url_for('admin.portfolio') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint and request.endpoint.startswith('admin.portfolio') %}bg-secondary text-white{% endif %}">
-                Portfolio
+            <a href="{{ url_for('admin.portfolio') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint and request.endpoint.startswith('admin.portfolio') %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-briefcase w-5 mr-2"></i> Portfolio
             </a>
-            <a href="{{ url_for('admin.book') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.book' %}bg-secondary text-white{% endif %}">
-                Livre
+            <a href="{{ url_for('admin.book') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint == 'admin.book' %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-book w-5 mr-2"></i> Livre
             </a>
-            <a href="{{ url_for('admin.seo') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.seo' %}bg-secondary text-white{% endif %}">
-                SEO
+            <a href="{{ url_for('admin.seo') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint == 'admin.seo' %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-search w-5 mr-2"></i> SEO
             </a>
-            <a href="{{ url_for('admin.settings') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.settings' %}bg-secondary text-white{% endif %}">
-                Paramètres
+            <a href="{{ url_for('admin.settings') }}" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted {% if request.endpoint == 'admin.settings' %}bg-white/10 text-adaptive font-medium{% endif %}">
+                <i class="fas fa-cog w-5 mr-2"></i> Paramètres
+            </a>
+            <a href="{{ url_for('main.index') }}" target="_blank" class="block py-2.5 px-4 rounded-xl transition duration-200 hover:bg-white/10 hover:text-adaptive text-adaptive-muted mt-4 border border-[var(--glass-border)]">
+                <i class="fas fa-external-link-alt w-5 mr-2"></i> Voir le site
             </a>
         </nav>
-        <div class="p-4 border-t border-secondary">
-            <a href="{{ url_for('admin.logout') }}" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-center transition duration-200">
-                Déconnexion
+        <div class="p-4 border-t border-[var(--glass-border)]">
+            <a href="{{ url_for('admin.logout') }}" class="block py-2.5 px-4 rounded-xl bg-red-500/20 text-red-500 hover:bg-red-500/30 text-center transition duration-200 font-medium">
+                <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
             </a>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col h-full relative w-full">
+    <div class="flex-1 flex flex-col h-full relative w-full z-10">
         <!-- Header -->
-        <header class="bg-white shadow-md p-4 flex justify-between items-center z-10">
+        <header class="glass-premium border-b border-[var(--glass-border)] p-4 flex justify-between items-center z-20" style="background: var(--glass-bg);">
             <div class="flex items-center">
-                <button class="md:hidden text-gray-600 hover:text-primary focus:outline-none mr-4" onclick="toggleSidebar()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <button class="md:hidden text-adaptive hover:text-accent focus:outline-none mr-4" onclick="toggleSidebar()">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
-                <div class="text-xl font-semibold text-gray-800">
+                <div class="font-display text-xl font-medium text-adaptive">
                     {% block header_title %}Dashboard{% endblock %}
                 </div>
             </div>
             <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="w-8 h-8 rounded-full glass-premium flex items-center justify-center text-adaptive hover:scale-110 transition-transform" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline text-yellow-300"></i>
+                </button>
                 {% if current_user.is_authenticated %}
-                <span class="text-sm text-gray-600">Bienvenue, {{ current_user.username }}</span>
+                <span class="text-sm font-mono text-adaptive-muted hidden sm:inline-block">Bienvenue, <span class="text-adaptive">{{ current_user.username }}</span></span>
                 {% endif %}
             </div>
         </header>
 
         <!-- Flash Messages -->
-        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-lg z-50">
+        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-lg z-50 px-4">
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
+                    <div class="space-y-2">
                     {% for category, message in messages %}
-                        <div class="p-4 mb-4 text-sm rounded-lg shadow-md {% if category == 'error' %}bg-red-100 text-red-700 border border-red-400{% else %}bg-green-100 text-green-700 border border-green-400{% endif %}" role="alert">
+                        <div class="p-4 text-sm rounded-xl font-medium shadow-lg backdrop-blur-md {% if category == 'error' %}bg-red-500/90 text-white border border-red-400{% else %}bg-emerald-500/90 text-white border border-emerald-400{% endif %}" role="alert">
                             {{ message }}
                         </div>
                     {% endfor %}
+                    </div>
                 {% endif %}
             {% endwith %}
         </div>
 
         <!-- Content Area -->
-        <main class="flex-1 p-6 overflow-x-hidden overflow-y-auto bg-gray-100">
-            {% block content %}{% endblock %}
+        <main class="flex-1 p-4 md:p-8 overflow-x-hidden overflow-y-auto admin-content">
+            <div class="glass-premium p-6 md:p-8 rounded-[32px] border border-[var(--glass-border)] bg-white/5 dark:bg-black/20 shadow-xl">
+                {% block content %}{% endblock %}
+            </div>
         </main>
     </div>
 
     <!-- Overlay for mobile sidebar -->
-    <div class="fixed inset-0 bg-black opacity-50 z-10 hidden md:hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden md:hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <script>
         function toggleSidebar() {
@@ -103,6 +154,28 @@
             const overlay = document.getElementById('sidebar-overlay');
             sidebar.classList.toggle('-translate-x-full');
             overlay.classList.toggle('hidden');
+        }
+
+        // --- LOGIQUE DARK / LIGHT MODE ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // Vérifier le thème sauvegardé
+        if (localStorage.getItem('theme') === 'light') {
+            htmlElement.classList.remove('dark');
+        } else {
+            htmlElement.classList.add('dark'); // Sombre par défaut
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
         }
     </script>
 </body>
