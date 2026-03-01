@@ -6,7 +6,7 @@
     {{ seo.custom_head_script | safe if seo and seo.custom_head_script else '' }}
     <title>{{ seo.meta_title if seo and seo.meta_title else 'Aisance KALONJI | Consultant IA & Cybersécurité' }}</title>
     {% if settings.get('favicon_url') %}
-    <link rel="icon" href="{{ settings.get('favicon_url') }}">
+    <link rel="icon" href="{{ url_for('static', filename=settings.get('favicon_url')) }}">
     {% else %}
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% endif %}
@@ -76,7 +76,7 @@
             <div class="glass-premium px-6 py-4 rounded-full flex items-center justify-between relative z-20">
                 <a href="#" class="flex-shrink-0 transition-transform hover:scale-105">
                     {% if settings.get('logo_type') == 'image' and settings.get('logo_image_url') %}
-                        <img src="{{ settings.get('logo_image_url') }}" alt="Logo" class="h-8 w-auto object-contain">
+                        <img src="{{ url_for('static', filename=settings.get('logo_image_url')) }}" alt="Logo" class="h-8 w-auto object-contain">
                     {% else %}
                         <div class="font-display text-lg md:text-xl tracking-widest uppercase text-adaptive">
                             {% set l_text = settings.get('logo_text') | default('Aisance KALONJI') %}
@@ -613,7 +613,8 @@
                     {% for item in portfolio %}
                     <a href="{{ item.link if item.link else '#' }}" target="_blank" rel="noopener noreferrer" class="glass-premium p-6 md:p-8 rounded-[32px] group relative overflow-hidden flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 gs-reveal cursor-pointer min-h-[240px]">
                         <div class="flex justify-between items-start mb-6">
-                            <div class="w-12 h-12 rounded-full bg-{{ item.color_class }}/10 flex items-center justify-center text-{{ item.color_class }}">
+                            <!-- Note Admin : Les classes dynamiques Tailwind (ex: bg-blue-500/10) sont purgées si non incluses dans la safelist. On utilise ici des couleurs par défaut. -->
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white dark:text-white">
                                 <i class="{{ item.icon_class }} text-xl"></i>
                             </div>
                             <div class="w-8 h-8 rounded-full glass-premium flex items-center justify-center text-adaptive-muted group-hover:text-adaptive transition-colors">
@@ -621,7 +622,7 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="font-display font-medium text-xl text-adaptive mb-2 group-hover:text-{{ item.color_class }} transition-colors">{{ item.title }}</h3>
+                            <h3 class="font-display font-medium text-xl text-adaptive mb-2 group-hover:text-white dark:group-hover:text-white transition-colors">{{ item.title }}</h3>
                             <p class="font-sans text-sm text-adaptive-muted font-light mb-4">{{ item.description }}</p>
                             {% if item.link %}
                             <span class="font-mono text-[10px] uppercase text-adaptive-muted tracking-widest">{{ item.link | replace("https://", "") | replace("http://", "") | replace("www.", "") | truncate(25, True, '...') }}</span>

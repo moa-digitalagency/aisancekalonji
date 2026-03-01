@@ -98,6 +98,37 @@ def init_db():
             db.session.add(new_book)
             db.session.commit()
 
+        # Pre-fill Portfolio default values
+        print("Checking default portfolio items...")
+        if not models.PortfolioItem.query.first():
+            print("Creating default portfolio items...")
+            default_portfolio = [
+                models.PortfolioItem(
+                    title="Centre Lithiase Tshatshi",
+                    description="Création d'une plateforme médicale spécialisée et déploiement d'écosystèmes technologiques résilients pour le secteur de la santé.",
+                    link="#",
+                    icon_class="fas fa-hospital",
+                    color_class="blue-500"
+                ),
+                models.PortfolioItem(
+                    title="J'ai Besoin d'Aide",
+                    description="Développement d'une plateforme à fort impact communautaire dédiée à la mise en relation et à l'entraide sociale.",
+                    link="#",
+                    icon_class="fas fa-hands-helping",
+                    color_class="yellow-500"
+                ),
+                models.PortfolioItem(
+                    title="LaCyberConfiance",
+                    description="Direction de la plateforme de sensibilisation. Création du Vade-mecum de LaCyberConfiance, réalisation d'audits cyber et R&D d'outils d'IA pour la détection de menaces.",
+                    link="https://www.cyberconfiance.com",
+                    icon_class="fas fa-shield-halved",
+                    color_class="emerald-500"
+                )
+            ]
+            for item in default_portfolio:
+                db.session.add(item)
+            db.session.commit()
+
         # Pre-fill GlobalSetting default values
         print("Checking default global settings...")
         default_global_settings = {
