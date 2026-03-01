@@ -91,10 +91,10 @@
 
                 <!-- Liens Desktop -->
                 <div class="hidden md:flex space-x-8 font-sans text-sm font-medium text-adaptive-muted">
-                    <a href="#vision" class="hover:text-[var(--text-main)] transition-colors">Vision</a>
-                    <a href="#expertise" class="hover:text-[var(--text-main)] transition-colors">Expertise</a>
-                    <a href="#experiences" class="hover:text-[var(--text-main)] transition-colors">Expériences</a>
-                    <a href="#realisations" class="hover:text-[var(--text-main)] transition-colors">Réalisations</a>
+                    <a href="#vision" class="hover:text-[var(--text-main)] transition-colors">{{ t('navbar.vision') }}</a>
+                    <a href="#expertise" class="hover:text-[var(--text-main)] transition-colors">{{ t('navbar.expertise') }}</a>
+                    <a href="#experiences" class="hover:text-[var(--text-main)] transition-colors">{{ t('navbar.experiences') }}</a>
+                    <a href="#realisations" class="hover:text-[var(--text-main)] transition-colors">{{ t('navbar.realisations') }}</a>
                 </div>
 
                 <div class="flex items-center space-x-2 sm:space-x-4">
@@ -139,6 +139,17 @@
                             </button>
                         </div>
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const langOptions = document.querySelectorAll('.lang-option');
+                            langOptions.forEach(option => {
+                                option.addEventListener('click', (e) => {
+                                    e.preventDefault();
+                                    window.location.href = '/set_lang/' + option.dataset.lang;
+                                });
+                            });
+                        });
+                    </script>
 
                     <!-- Bouton Theme Toggle -->
                     <button id="theme-toggle" class="w-10 h-10 rounded-full glass-premium flex items-center justify-center text-adaptive hover:scale-110 transition-transform" aria-label="Toggle Dark Mode">
@@ -151,18 +162,18 @@
                         <i class="fas fa-bars"></i>
                     </button>
 
-                    <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid !py-2 !px-6 !text-sm hidden sm:inline-flex">Réserver une consultation</a>
+                    <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid !py-2 !px-6 !text-sm hidden sm:inline-flex">{{ t('navbar.book_consultation') }}</a>
                 </div>
             </div>
 
             <!-- Menu Mobile Dropdown (Fond opaque ajouté pour lisibilité) -->
             <div id="mobile-menu" class="absolute top-full left-0 right-0 mt-2 glass-premium bg-white/95 dark:bg-[#030303]/95 backdrop-blur-xl rounded-[32px] p-6 flex flex-col space-y-4 shadow-2xl transition-all duration-300 opacity-0 invisible -translate-y-4 z-10 md:hidden border border-[var(--glass-border)]">
-                <a href="#vision" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">Vision</a>
-                <a href="#expertise" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">Expertise</a>
-                <a href="#experiences" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">Expériences</a>
-                <a href="#realisations" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">Réalisations</a>
+                <a href="#vision" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">{{ t('navbar.vision') }}</a>
+                <a href="#expertise" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">{{ t('navbar.expertise') }}</a>
+                <a href="#experiences" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">{{ t('navbar.experiences') }}</a>
+                <a href="#realisations" class="mobile-link text-lg font-display text-adaptive hover:text-accent transition-colors">{{ t('navbar.realisations') }}</a>
                 <div class="pt-4 border-t border-[var(--glass-border)] sm:hidden">
-                    <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid w-full !py-3 flex justify-center">Réserver une consultation</a>
+                    <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid w-full !py-3 flex justify-center">{{ t('navbar.book_consultation') }}</a>
                 </div>
             </div>
         </div>

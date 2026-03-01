@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, session, request, redirect, url_for
 from flask_login import LoginManager
 from models.base import db
 from models.admin_user import AdminUser
@@ -39,6 +39,26 @@ def create_app():
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(api_bp, url_prefix='/api')
     app.register_blueprint(admin_bp, url_prefix='/admin')
+
+    # Multi-language setup
+    from utils.i18n import get_translation
+
+    @app.route('/set_lang/<lang_code>')
+    def set_lang(lang_code):
+        # Validate lang_code based on available files, but we can just set it
+        available_langs = ['fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh', 'ja', 'ko']
+        if lang_code in available_langs:
+            session['lang'] = lang_code
+        return redirect(request.referrer or url_for('main.index'))
+
+    @app.context_processor
+    def inject_lang():
+        lang = session.get('lang', 'fr')
+
+        def t(key):
+            return get_translation(lang, key)
+
+        return dict(current_lang=lang, t=t)
 
     # Register error handlers
     from models.setting import GlobalSetting
