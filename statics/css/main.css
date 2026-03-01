@@ -1,0 +1,133 @@
+        /* Variables CSS pour gérer facilement le Light/Dark mode */
+        :root {
+            --bg-main: #f8fafc; /* slate-50 */
+            --text-main: #0f172a; /* slate-900 */
+            --text-muted: #475569; /* Plus lisible sur fond clair (slate-600) */
+
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --glass-shadow: rgba(0, 0, 0, 0.05);
+
+            --blob-1: rgba(59, 130, 246, 0.2); /* Bleu */
+            --blob-2: rgba(168, 85, 247, 0.2); /* Violet */
+            --blob-3: rgba(56, 189, 248, 0.2); /* Cyan */
+
+            --btn-solid-bg: #0f172a;
+            --btn-solid-text: #ffffff;
+            --btn-solid-hover: #1e293b;
+        }
+
+        .dark {
+            --bg-main: #030303;
+            --text-main: #ffffff;
+            --text-muted: #cbd5e1; /* Plus clair et lisible sur fond sombre (slate-300) */
+
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --glass-shadow: rgba(0, 0, 0, 0.3);
+
+            --blob-1: rgba(59, 130, 246, 0.15);
+            --blob-2: rgba(147, 51, 234, 0.1);
+            --blob-3: rgba(56, 189, 248, 0.1);
+
+            --btn-solid-bg: #ffffff;
+            --btn-solid-text: #000000;
+            --btn-solid-hover: #e2e8f0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Classes utilitaires pour le texte */
+        .text-adaptive { color: var(--text-main); transition: color 0.5s ease; }
+        .text-adaptive-muted { color: var(--text-muted); transition: color 0.5s ease; }
+
+        /* --- PRELOADER (Reste sombre pour le style Cyber) --- */
+        #preloader {
+            position: fixed; inset: 0; background: #030303; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .term-line { color: #888888; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 2; opacity: 0; }
+        .term-line span.highlight { color: #ffffff; font-weight: 500; }
+
+        /* --- BACKGROUND ANIMÉ (BLOBS) --- */
+        .blob-container {
+            position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+        }
+        .blob {
+            position: absolute; filter: blur(90px); border-radius: 50%;
+            animation: float 20s infinite cubic-bezier(0.4, 0, 0.2, 1) alternate;
+            transition: background-color 0.8s ease;
+        }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--blob-1); animation-delay: 0s; }
+        .blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--blob-2); animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 30%; width: 40vw; height: 40vw; background: var(--blob-3); animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(5%, 10%) scale(1.1) rotate(5deg); }
+            100% { transform: translate(-5%, 5%) scale(0.9) rotate(-5deg); }
+        }
+
+        @keyframes float-ui {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- PREMIUM GLASSMORPHISM --- */
+        .glass-premium {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 40px var(--glass-shadow);
+            transition: all 0.5s ease;
+        }
+        .glass-premium:hover {
+            border-color: rgba(136, 136, 136, 0.2);
+        }
+
+        /* --- BOUTONS --- */
+        .btn-glass {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1rem 2rem; border-radius: 100px;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 0.95rem;
+            color: var(--text-main); background: var(--glass-bg);
+            backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
+            transition: all 0.4s ease; cursor: pointer;
+        }
+        .btn-glass:hover {
+            transform: translateY(-2px); border-color: var(--text-muted);
+            box-shadow: 0 10px 30px -10px var(--glass-shadow);
+        }
+
+        .btn-solid {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1rem 2rem; border-radius: 100px;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.95rem;
+            background: var(--btn-solid-bg); color: var(--btn-solid-text);
+            transition: all 0.4s ease; cursor: pointer;
+        }
+        .btn-solid:hover {
+            transform: translateY(-2px); background: var(--btn-solid-hover);
+            box-shadow: 0 10px 30px -10px var(--glass-shadow);
+        }
+
+        /* --- IMAGES & PARALLAX --- */
+        .img-mask {
+            overflow: hidden; border-radius: 32px; position: relative;
+            transform: translateZ(0); box-shadow: 0 20px 40px var(--glass-shadow);
+        }
+        .img-parallax {
+            width: 100%; height: 130%; object-fit: cover;
+            transform-origin: center; will-change: transform;
+        }
+
+        ::-webkit-scrollbar { display: none; }
