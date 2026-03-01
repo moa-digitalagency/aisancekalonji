@@ -83,3 +83,89 @@ def images():
             flash(f'Une erreur est survenue : {str(e)}', 'error')
 
     return render_template('admin/images.html', images=images)
+
+@admin_bp.route('/portfolio')
+@login_required
+def portfolio():
+    items = PortfolioItem.query.order_by(PortfolioItem.order.asc()).all()
+    return render_template('admin/portfolio.html', items=items)
+
+@admin_bp.route('/portfolio/add', methods=['GET', 'POST'])
+@login_required
+def portfolio_add():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        link = request.form.get('link')
+        icon_class = request.form.get('icon_class')
+        color_class = request.form.get('color_class')
+        is_active = request.form.get('is_active') == 'on'
+
+        try:
+            new_item = PortfolioItem(
+                title=title,
+                description=description,
+                link=link,
+                icon_class=icon_class,
+                color_class=color_class,
+                is_active=is_active
+            )
+            db.session.add(new_item)
+            db.session.commit()
+            flash('Projet ajouté avec succès.', 'success')
+            return redirect(url_for('admin.portfolio'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue : {str(e)}', 'error')
+
+    return render_template('admin/portfolio_form.html', item=None)
+
+@admin_bp.route('/portfolio/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def portfolio_edit(id):
+    item = PortfolioItem.query.get_or_404(id)
+
+    if request.method == 'POST':
+        item.title = request.form.get('title')
+        item.description = request.form.get('description')
+        item.link = request.form.get('link')
+        item.icon_class = request.form.get('icon_class')
+        item.color_class = request.form.get('color_class')
+        item.is_active = request.form.get('is_active') == 'on'
+
+        try:
+            db.session.commit()
+            flash('Projet modifié avec succès.', 'success')
+            return redirect(url_for('admin.portfolio'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue : {str(e)}', 'error')
+
+    return render_template('admin/portfolio_form.html', item=item)
+
+@admin_bp.route('/portfolio/delete/<int:id>', methods=['POST'])
+@login_required
+def portfolio_delete(id):
+    item = PortfolioItem.query.get_or_404(id)
+    try:
+        db.session.delete(item)
+        db.session.commit()
+        flash('Projet supprimé avec succès.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Une erreur est survenue : {str(e)}', 'error')
+    return redirect(url_for('admin.portfolio'))
+
+@admin_bp.route('/portfolio/toggle/<int:id>', methods=['POST'])
+@login_required
+def portfolio_toggle(id):
+    item = PortfolioItem.query.get_or_404(id)
+    try:
+        item.is_active = not item.is_active
+        db.session.commit()
+        status = "activé" if item.is_active else "désactivé"
+        flash(f'Projet {status} avec succès.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Une erreur est survenue : {str(e)}', 'error')
+    return redirect(url_for('admin.portfolio'))

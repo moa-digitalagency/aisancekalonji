@@ -36,7 +36,7 @@
             <a href="{{ url_for('admin.images') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.images' %}bg-secondary text-white{% endif %}">
                 Images
             </a>
-            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+            <a href="{{ url_for('admin.portfolio') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint and request.endpoint.startswith('admin.portfolio') %}bg-secondary text-white{% endif %}">
                 Portfolio
             </a>
             <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
