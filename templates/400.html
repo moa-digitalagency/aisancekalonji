@@ -1,0 +1,42 @@
+{% extends "error_base.html" %}
+
+{% block title %}Mauvaise Requête - 400{% endblock %}
+
+{% block content %}
+<div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <div class="w-full lg:w-1/2 flex justify-center order-1 lg:order-2">
+        <div class="w-64 h-64 md:w-80 md:h-80 relative">
+            <lottie-player src="{{ url_for('static', filename='lottie/400-confused-robot.json') }}" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+            <div class="absolute inset-0 flex items-center justify-center text-9xl font-display font-black text-white/5 pointer-events-none">400</div>
+        </div>
+    </div>
+
+    <div class="w-full lg:w-1/2 order-2 lg:order-1 text-center lg:text-left">
+        <div class="inline-flex items-center px-4 py-2 rounded-full glass-premium mb-6 border border-orange-500/30">
+            <i class="fas fa-robot text-orange-500 mr-3 animate-bounce"></i>
+            <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">Syntax Error</span>
+        </div>
+
+        <h1 class="font-display text-4xl md:text-5xl font-medium mb-4 text-adaptive">
+            J'ai presque <span class="text-orange-500">compris</span>...
+        </h1>
+        <p class="font-sans text-adaptive-muted text-lg font-light mb-6 leading-relaxed">
+            Mais en fait non. Soyons honnêtes, votre demande est complètement mal fichue.
+            Le serveur est un peu passif-agressif ce matin et refuse de traiter une requête avec une mauvaise syntaxe.
+        </p>
+
+        <p class="font-mono text-xs text-adaptive-muted mb-8 bg-orange-500/5 p-4 rounded-xl border border-orange-500/10">
+            // Diagnostic : C'est pas moi, c'est vous (le client). Vérifiez l'URL ou les données envoyées.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <button onclick="window.history.back()" class="btn-solid !px-8 !py-4 shadow-lg hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] !bg-orange-600 !hover:bg-orange-700 !text-base transition-all inline-flex items-center w-full sm:w-auto justify-center">
+                <i class="fas fa-undo mr-2"></i> Réessayer proprement
+            </button>
+            <a href="{{ url_for('main.index') }}" class="btn-glass !px-8 !py-4 w-full sm:w-auto backdrop-blur-md">
+                Repartir de zéro
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
