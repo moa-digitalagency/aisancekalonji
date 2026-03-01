@@ -8,5 +8,15 @@
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 410-907-091
-127.0.0.1 - - [01/Mar/2026 19:26:24] "GET /admin/login HTTP/1.1" 200 -
-127.0.0.1 - - [01/Mar/2026 19:26:25] "POST /admin/login HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:30:51] "HEAD /admin/login HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:30:58] "[32mHEAD /admin/book HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Mar/2026 20:30:58] "[32mHEAD /admin/seo HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Mar/2026 20:30:58] "[32mHEAD /admin/settings HTTP/1.1[0m" 302 -
+127.0.0.1 - - [01/Mar/2026 20:31:47] "GET /admin/login HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:31:49] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+/app/main.py:35: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  return AdminUser.query.get(int(user_id))
+127.0.0.1 - - [01/Mar/2026 20:31:49] "GET /admin/dashboard HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:31:49] "GET /admin/book HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:31:49] "GET /admin/seo HTTP/1.1" 200 -
+127.0.0.1 - - [01/Mar/2026 20:31:50] "GET /admin/settings HTTP/1.1" 200 -

@@ -169,3 +169,88 @@ def portfolio_toggle(id):
         db.session.rollback()
         flash(f'Une erreur est survenue : {str(e)}', 'error')
     return redirect(url_for('admin.portfolio'))
+
+from models.book import BookSection
+from models.setting import SeoSetting, GlobalSetting
+
+@admin_bp.route('/book', methods=['GET', 'POST'])
+@login_required
+def book():
+    book_section = BookSection.query.first()
+    if not book_section:
+        book_section = BookSection()
+        db.session.add(book_section)
+        db.session.commit()
+
+    if request.method == 'POST':
+        book_section.title = request.form.get('title')
+        book_section.subtitle = request.form.get('subtitle')
+        book_section.description = request.form.get('description')
+        book_section.cta_link = request.form.get('cta_link')
+        book_section.cta_text = request.form.get('cta_text')
+
+        try:
+            db.session.commit()
+            flash('Section Livre mise à jour avec succès.', 'success')
+            return redirect(url_for('admin.book'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue : {str(e)}', 'error')
+
+    return render_template('admin/book.html', book=book_section)
+
+@admin_bp.route('/seo', methods=['GET', 'POST'])
+@login_required
+def seo():
+    seo_setting = SeoSetting.query.first()
+    if not seo_setting:
+        seo_setting = SeoSetting()
+        db.session.add(seo_setting)
+        db.session.commit()
+
+    if request.method == 'POST':
+        seo_setting.meta_title = request.form.get('meta_title')
+        seo_setting.meta_description = request.form.get('meta_description')
+        seo_setting.custom_head_script = request.form.get('custom_head_script')
+        seo_setting.og_image = request.form.get('og_image')
+
+        try:
+            db.session.commit()
+            flash('Paramètres SEO mis à jour avec succès.', 'success')
+            return redirect(url_for('admin.seo'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue : {str(e)}', 'error')
+
+    return render_template('admin/seo.html', seo=seo_setting)
+
+@admin_bp.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    keys = [
+        'facebook', 'instagram', 'x', 'linkedin', 'whatsapp',
+        'phone', 'email', 'address'
+    ]
+
+    if request.method == 'POST':
+        try:
+            for key in keys:
+                value = request.form.get(key)
+                setting = GlobalSetting.query.filter_by(key=key).first()
+                if setting:
+                    setting.value = value
+                else:
+                    new_setting = GlobalSetting(key=key, value=value)
+                    db.session.add(new_setting)
+
+            db.session.commit()
+            flash('Paramètres globaux mis à jour avec succès.', 'success')
+            return redirect(url_for('admin.settings'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Une erreur est survenue : {str(e)}', 'error')
+
+    # Fetch existing settings to populate the form
+    existing_settings = {s.key: s.value for s in GlobalSetting.query.all()}
+
+    return render_template('admin/settings.html', settings=existing_settings)

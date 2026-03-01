@@ -39,13 +39,13 @@
             <a href="{{ url_for('admin.portfolio') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint and request.endpoint.startswith('admin.portfolio') %}bg-secondary text-white{% endif %}">
                 Portfolio
             </a>
-            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+            <a href="{{ url_for('admin.book') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.book' %}bg-secondary text-white{% endif %}">
                 Livre
             </a>
-            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+            <a href="{{ url_for('admin.seo') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.seo' %}bg-secondary text-white{% endif %}">
                 SEO
             </a>
-            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+            <a href="{{ url_for('admin.settings') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.settings' %}bg-secondary text-white{% endif %}">
                 Paramètres
             </a>
         </nav>
