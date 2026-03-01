@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Aisance Kalonji</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a202c',
+                        secondary: '#2d3748',
+                        accent: '#4a5568',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal text-gray-900 h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-primary text-white flex flex-col h-full shadow-lg z-20 transition-transform duration-300 transform -translate-x-full md:translate-x-0 fixed md:relative" id="sidebar">
+        <div class="p-6 border-b border-secondary flex justify-between items-center">
+            <h1 class="text-2xl font-semibold uppercase tracking-wider">Admin Panel</h1>
+            <button class="md:hidden text-gray-300 hover:text-white" onclick="toggleSidebar()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="flex-grow p-4 space-y-2 overflow-y-auto">
+            <a href="{{ url_for('admin.dashboard') }}" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white {% if request.endpoint == 'admin.dashboard' %}bg-secondary text-white{% endif %}">
+                Dashboard
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+                Images
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+                Portfolio
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+                Livre
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+                SEO
+            </a>
+            <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-secondary hover:text-white">
+                Paramètres
+            </a>
+        </nav>
+        <div class="p-4 border-t border-secondary">
+            <a href="{{ url_for('admin.logout') }}" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-center transition duration-200">
+                Déconnexion
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col h-full relative w-full">
+        <!-- Header -->
+        <header class="bg-white shadow-md p-4 flex justify-between items-center z-10">
+            <div class="flex items-center">
+                <button class="md:hidden text-gray-600 hover:text-primary focus:outline-none mr-4" onclick="toggleSidebar()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="text-xl font-semibold text-gray-800">
+                    {% block header_title %}Dashboard{% endblock %}
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                {% if current_user.is_authenticated %}
+                <span class="text-sm text-gray-600">Bienvenue, {{ current_user.username }}</span>
+                {% endif %}
+            </div>
+        </header>
+
+        <!-- Flash Messages -->
+        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-full max-w-lg z-50">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="p-4 mb-4 text-sm rounded-lg shadow-md {% if category == 'error' %}bg-red-100 text-red-700 border border-red-400{% else %}bg-green-100 text-green-700 border border-green-400{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Content Area -->
+        <main class="flex-1 p-6 overflow-x-hidden overflow-y-auto bg-gray-100">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="fixed inset-0 bg-black opacity-50 z-10 hidden md:hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebar-overlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
