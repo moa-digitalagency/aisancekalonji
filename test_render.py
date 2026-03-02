@@ -24,6 +24,12 @@ def inject_lang():
         return get_translation(lang, key)
     return dict(current_lang=lang, t=t)
 
+@app.template_filter('fallback_lang')
+def fallback_lang_filter(field_data, lang_code='fr'):
+    if isinstance(field_data, dict):
+        return field_data.get(lang_code, field_data.get('fr', ''))
+    return field_data or ''
+
 # Initialize and seed database
 with app.app_context():
     init_db.init_db()  # Note: this will create tables using a new app instance but uses the same env var. Let's just create tables directly here.
