@@ -60,6 +60,12 @@ def create_app():
 
         return dict(current_lang=lang, t=t)
 
+    @app.template_filter('fallback_lang')
+    def fallback_lang_filter(field_data, lang_code='fr'):
+        if isinstance(field_data, dict):
+            return field_data.get(lang_code, field_data.get('fr', ''))
+        return field_data or ''
+
     # Register error handlers
     from models.setting import GlobalSetting
 

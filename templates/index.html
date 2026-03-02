@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="fr" class="dark">
+<html lang="{{ session.get('lang', 'fr') }}" {% if session.get('lang', 'fr') == 'ar' %}dir="rtl"{% else %}dir="ltr"{% endif %} class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ seo.custom_head_script | safe if seo and seo.custom_head_script else '' }}
-    <title>{{ seo.meta_title if seo and seo.meta_title else 'Aisance KALONJI | Consultant IA & Cybersécurité' }}</title>
+    <title>{{ (seo.meta_title | fallback_lang(session.get('lang', 'fr'))) if seo and (seo.meta_title | fallback_lang(session.get('lang', 'fr'))) else 'Aisance KALONJI | Consultant IA & Cybersécurité' }}</title>
     {% if settings.get('favicon_url') %}
     <link rel="icon" href="{{ url_for('static', filename=settings.get('favicon_url')) }}">
     {% else %}
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
     {% endif %}
-    {% if seo and seo.meta_description %}<meta name="description" content="{{ seo.meta_description }}">{% endif %}
+    {% if seo and (seo.meta_description | fallback_lang(session.get('lang', 'fr'))) %}<meta name="description" content="{{ (seo.meta_description | fallback_lang(session.get('lang', 'fr'))) }}">{% endif %}
 
     <!-- Polices Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -427,9 +427,9 @@
                                 <div class="w-12 h-12 rounded-full glass-premium flex items-center justify-center text-accent mb-6 shadow-xl">
                                     <i class="fas fa-shield-alt text-xl"></i>
                                 </div>
-                                <h3 class="font-display text-white text-3xl font-bold mb-3 leading-tight drop-shadow-lg">{{ book.title if book else "Vade-mecum de la sécurité numérique" }}</h3>
+                                <h3 class="font-display text-white text-3xl font-bold mb-3 leading-tight drop-shadow-lg">{{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else "Vade-mecum de la sécurité numérique" }}</h3>
                                 <div class="w-12 h-1 bg-accent rounded-full mb-6"></div>
-                                <p class="text-white/70 font-mono text-xs uppercase tracking-widest">{{ book.subtitle if book else "Aisance Kalonji" }}</p>
+                                <p class="text-white/70 font-mono text-xs uppercase tracking-widest">{{ (book.subtitle | fallback_lang(session.get('lang', 'fr'))) if book else "Aisance Kalonji" }}</p>
                             </div>
                         </div>
                         <!-- Décorations flottantes -->
@@ -443,10 +443,10 @@
                             <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">Livre / Publication</span>
                         </div>
                         <h2 class="font-display text-4xl md:text-5xl font-medium mb-6 text-adaptive leading-[1.1]">
-                            {{ book.title if book else "Le Vade-mecum de la sécurité numérique" }}
+                            {{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else "Le Vade-mecum de la sécurité numérique" }}
                         </h2>
                         <p class="font-sans text-adaptive-muted text-lg font-light mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            {{ book.description if book else "Un guide essentiel et pratique conçu pour démystifier l'hygiène numérique. À travers cet ouvrage, je partage des stratégies concrètes et des protocoles de sécurité pour protéger les actifs digitaux des entreprises et des particuliers face aux menaces modernes." }}
+                            {{ (book.description | fallback_lang(session.get('lang', 'fr'))) if book else "Un guide essentiel et pratique conçu pour démystifier l'hygiène numérique. À travers cet ouvrage, je partage des stratégies concrètes et des protocoles de sécurité pour protéger les actifs digitaux des entreprises et des particuliers face aux menaces modernes." }}
                         </p>
                         <ul class="mb-10 space-y-4 font-sans text-adaptive-muted font-light text-left max-w-xl mx-auto lg:mx-0">
                             <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>Audit de sécurité personnelle et professionnelle.</span></li>
@@ -455,7 +455,7 @@
                         </ul>
                         <div class="flex flex-col sm:flex-row justify-center lg:justify-start">
                             <a href="{{ book.cta_link if book and book.cta_link else 'https://www.cyberconfiance.com' }}" target="_blank" rel="noopener noreferrer" class="btn-solid !px-8 !py-4 shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] !text-base transition-all inline-flex items-center group w-full sm:w-auto justify-center">
-                                {{ book.cta_text if book and book.cta_text else 'Obtenir mon exemplaire' }} <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                                {{ (book.cta_text | fallback_lang(session.get('lang', 'fr'))) if book and (book.cta_text | fallback_lang(session.get('lang', 'fr'))) else 'Obtenir mon exemplaire' }} <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
@@ -633,8 +633,8 @@
                             </div>
                         </div>
                         <div>
-                            <h3 class="font-display font-medium text-xl text-adaptive mb-2 group-hover:text-white dark:group-hover:text-white transition-colors">{{ item.title }}</h3>
-                            <p class="font-sans text-sm text-adaptive-muted font-light mb-4">{{ item.description }}</p>
+                            <h3 class="font-display font-medium text-xl text-adaptive mb-2 group-hover:text-white dark:group-hover:text-white transition-colors">{{ (item.title | fallback_lang(session.get('lang', 'fr'))) }}</h3>
+                            <p class="font-sans text-sm text-adaptive-muted font-light mb-4">{{ (item.description | fallback_lang(session.get('lang', 'fr'))) }}</p>
                             {% if item.link %}
                             <span class="font-mono text-[10px] uppercase text-adaptive-muted tracking-widest">{{ item.link | replace("https://", "") | replace("http://", "") | replace("www.", "") | truncate(25, True, '...') }}</span>
                             {% endif %}
