@@ -25,6 +25,14 @@
     <script>
         tailwind.config = {
             darkMode: 'class', // Activation du mode sombre manuel
+            safelist: [
+                'bg-blue-500/10', 'text-blue-500', 'group-hover:text-blue-500', 'dark:text-blue-500', 'dark:group-hover:text-blue-500',
+                'bg-emerald-500/10', 'text-emerald-500', 'group-hover:text-emerald-500', 'dark:text-emerald-500', 'dark:group-hover:text-emerald-500',
+                'bg-purple-500/10', 'text-purple-500', 'group-hover:text-purple-500', 'dark:text-purple-500', 'dark:group-hover:text-purple-500',
+                'bg-orange-500/10', 'text-orange-500', 'group-hover:text-orange-500', 'dark:text-orange-500', 'dark:group-hover:text-orange-500',
+                'bg-pink-500/10', 'text-pink-500', 'group-hover:text-pink-500', 'dark:text-pink-500', 'dark:group-hover:text-pink-500',
+                'bg-yellow-500/10', 'text-yellow-500', 'group-hover:text-yellow-500', 'dark:text-yellow-500', 'dark:group-hover:text-yellow-500'
+            ],
             theme: {
                 extend: {
                     fontFamily: {
@@ -625,7 +633,7 @@
                     <a href="{{ item.link if item.link else '#' }}" target="_blank" rel="noopener noreferrer" class="glass-premium p-6 md:p-8 rounded-[32px] group relative overflow-hidden flex flex-col justify-between hover:-translate-y-2 transition-transform duration-500 gs-reveal cursor-pointer min-h-[240px]">
                         <div class="flex justify-between items-start mb-6">
                             <!-- Note Admin : Les classes dynamiques Tailwind (ex: bg-blue-500/10) sont purgées si non incluses dans la safelist. On utilise ici des couleurs par défaut. -->
-                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white dark:text-white">
+                            <div class="w-12 h-12 rounded-full bg-{{ item.color_class }}/10 flex items-center justify-center text-{{ item.color_class }} dark:text-{{ item.color_class }} group-hover:text-{{ item.color_class }} dark:group-hover:text-{{ item.color_class }} transition-colors">
                                 <i class="{{ item.icon_class }} text-xl"></i>
                             </div>
                             <div class="w-8 h-8 rounded-full glass-premium flex items-center justify-center text-adaptive-muted group-hover:text-adaptive transition-colors">
