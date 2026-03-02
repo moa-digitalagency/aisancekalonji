@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,10 +112,6 @@
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" class="w-8 h-8 rounded-full glass-premium flex items-center justify-center text-adaptive hover:scale-110 transition-transform" aria-label="Toggle Dark Mode">
-                    <i class="fas fa-moon dark:hidden"></i>
-                    <i class="fas fa-sun hidden dark:inline text-yellow-300"></i>
-                </button>
                 {% if current_user.is_authenticated %}
                 <span class="text-sm font-mono text-adaptive-muted hidden sm:inline-block">Bienvenue, <span class="text-adaptive">{{ current_user.username }}</span></span>
                 {% endif %}
@@ -156,27 +152,6 @@
             overlay.classList.toggle('hidden');
         }
 
-        // --- LOGIQUE DARK / LIGHT MODE ---
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const htmlElement = document.documentElement;
-
-        // Vérifier le thème sauvegardé
-        if (localStorage.getItem('theme') === 'light') {
-            htmlElement.classList.remove('dark');
-        } else {
-            htmlElement.classList.add('dark'); // Sombre par défaut
-        }
-
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                htmlElement.classList.toggle('dark');
-                if (htmlElement.classList.contains('dark')) {
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    localStorage.setItem('theme', 'light');
-                }
-            });
-        }
     </script>
 </body>
 </html>
