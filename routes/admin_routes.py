@@ -16,8 +16,14 @@ def update_json_field(current_value, new_value_fr):
     If current_value is None or not a dict, initializes it as a dict.
     Preserves other language keys if they exist.
     """
-    if not isinstance(current_value, dict):
+    # Si la valeur actuelle est une simple chaîne (ancienne DB), on la convertit en dict
+    if isinstance(current_value, str):
+        current_value = {'fr': current_value}
+    elif not isinstance(current_value, dict):
         current_value = {}
+    else:
+        # Duplicate the dictionary so SQLAlchemy detects the change
+        current_value = dict(current_value)
 
     # We update the 'fr' key specifically as the admin interface is in French
     if new_value_fr is not None:
@@ -155,9 +161,9 @@ def portfolio_edit(id):
 
         # SQLAlchemy requires assigning a new dictionary object to detect the change on JSON columns
         if title_fr is not None:
-            item.title = update_json_field(dict(item.title) if item.title else {}, title_fr)
+            item.title = update_json_field(item.title, title_fr)
         if description_fr is not None:
-            item.description = update_json_field(dict(item.description) if item.description else {}, description_fr)
+            item.description = update_json_field(item.description, description_fr)
 
         item.link = request.form.get('link')
         item.icon_class = request.form.get('icon_class')
@@ -225,13 +231,13 @@ def book():
         cta_text_fr = request.form.get('cta_text')
 
         if title_fr is not None:
-            book_section.title = update_json_field(dict(book_section.title) if book_section.title else {}, title_fr)
+            book_section.title = update_json_field(book_section.title, title_fr)
         if subtitle_fr is not None:
-            book_section.subtitle = update_json_field(dict(book_section.subtitle) if book_section.subtitle else {}, subtitle_fr)
+            book_section.subtitle = update_json_field(book_section.subtitle, subtitle_fr)
         if description_fr is not None:
-            book_section.description = update_json_field(dict(book_section.description) if book_section.description else {}, description_fr)
+            book_section.description = update_json_field(book_section.description, description_fr)
         if cta_text_fr is not None:
-            book_section.cta_text = update_json_field(dict(book_section.cta_text) if book_section.cta_text else {}, cta_text_fr)
+            book_section.cta_text = update_json_field(book_section.cta_text, cta_text_fr)
 
         book_section.cta_link = request.form.get('cta_link')
 
@@ -264,9 +270,9 @@ def seo():
         meta_description_fr = request.form.get('meta_description')
 
         if meta_title_fr is not None:
-            seo_setting.meta_title = update_json_field(dict(seo_setting.meta_title) if seo_setting.meta_title else {}, meta_title_fr)
+            seo_setting.meta_title = update_json_field(seo_setting.meta_title, meta_title_fr)
         if meta_description_fr is not None:
-            seo_setting.meta_description = update_json_field(dict(seo_setting.meta_description) if seo_setting.meta_description else {}, meta_description_fr)
+            seo_setting.meta_description = update_json_field(seo_setting.meta_description, meta_description_fr)
 
         seo_setting.custom_head_script = request.form.get('custom_head_script')
         seo_setting.og_image = request.form.get('og_image')
