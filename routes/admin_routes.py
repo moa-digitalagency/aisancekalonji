@@ -275,7 +275,18 @@ def seo():
             seo_setting.meta_description = update_json_field(seo_setting.meta_description, meta_description_fr)
 
         seo_setting.custom_head_script = request.form.get('custom_head_script')
-        seo_setting.og_image = request.form.get('og_image')
+
+        og_file = request.files.get('og_image_file')
+        if og_file and og_file.filename != '':
+            upload_path = handle_secure_upload(og_file)
+            if upload_path:
+                seo_setting.og_image = url_for('static', filename=upload_path)
+            else:
+                flash('Format de fichier non autorisé ou fichier invalide pour l\'image OG.', 'error')
+        else:
+            og_text = request.form.get('og_image')
+            if og_text is not None:
+                seo_setting.og_image = og_text
 
         try:
             db.session.commit()
