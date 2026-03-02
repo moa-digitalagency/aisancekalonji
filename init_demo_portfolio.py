@@ -1,136 +1,172 @@
 import os
-from dotenv import load_dotenv
+import sys
+
+# Ajouter le répertoire parent au path pour pouvoir importer l'application
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+
 from main import create_app
 from models.base import db
 from models.portfolio import PortfolioItem
+from sqlalchemy.exc import SQLAlchemyError
 
 def init_demo_portfolio():
-    load_dotenv()
-
-    # Initialize the Flask app using the same config as the main application
     app = create_app()
 
     with app.app_context():
         try:
             print("Nettoyage des réalisations existantes dans le portfolio...")
-            # Safely clear the existing portfolio items
+            # Vider la table pour éviter les doublons lors de l'exécution multiple
             PortfolioItem.query.delete()
+            db.session.commit()
 
             print("Création des réalisations (portfolio) avec le support multilingue (10 langues)...")
 
-            # Définition des éléments du portfolio avec les clés: 'fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh', 'ja', 'ko'
-            items = [
+            # Définition des éléments du portfolio à insérer
+            items_to_insert = [
                 {
-                    "title": {
-                        "fr": "Centre Lithiase Tshatshi",
-                        "en": "Lithiase Tshatshi Center",
-                        "es": "Centro Lithiase Tshatshi",
-                        "pt": "Centro Lithiase Tshatshi",
-                        "it": "Centro Lithiase Tshatshi",
-                        "de": "Lithiase Tshatshi Zentrum",
-                        "ar": "مركز ليثياس تشاتشي",
-                        "zh": "Lithiase Tshatshi中心",
-                        "ja": "Lithiase Tshatshiセンター",
-                        "ko": "Lithiase Tshatshi 센터"
-                    },
-                    "description": {
-                        "fr": "Création d'une plateforme médicale spécialisée et déploiement d'écosystèmes technologiques résilients pour le secteur de la santé.",
-                        "en": "Creation of a specialized medical platform and deployment of resilient technological ecosystems for the healthcare sector.",
-                        "es": "Creación de una plataforma médica especializada y despliegue de ecosistemas tecnológicos resilientes para el sector salud.",
-                        "pt": "Criação de uma plataforma médica especializada e implementação de ecossistemas tecnológicos resilientes para o setor de saúde.",
-                        "it": "Creazione di una piattaforma medica specializzata e implementazione di ecosistemi tecnologici resilienti per il settore sanitario.",
-                        "de": "Schaffung einer spezialisierten medizinischen Plattform und Einsatz widerstandsfähiger technologischer Ökosysteme für den Gesundheitssektor.",
-                        "ar": "إنشاء منصة طبية متخصصة ونشر أنظمة تكنولوجية مرنة لقطاع الرعاية الصحية.",
-                        "zh": "创建专业医疗平台并为医疗保健部门部署有弹性的技术生态系统。",
-                        "ja": "専門的な医療プラットフォームの構築と、ヘルスケア分野における回復力のある技術エコシステムの展開。",
-                        "ko": "의료 부문을 위한 전문 의료 플랫폼 구축 및 탄력적인 기술 생태계 배포."
-                    },
-                    "link": "#",
-                    "icon_class": "fas fa-hospital",
+                    "title": {"fr": "Centre Lithiase Tshatshi", "en": "Centre Lithiase Tshatshi", "es": "Centre Lithiase Tshatshi", "pt": "Centre Lithiase Tshatshi", "it": "Centre Lithiase Tshatshi", "de": "Centre Lithiase Tshatshi", "ar": "Centre Lithiase Tshatshi", "zh": "Centre Lithiase Tshatshi", "ja": "Centre Lithiase Tshatshi", "ko": "Centre Lithiase Tshatshi"},
+                    "description": {"fr": "Conception du portail du Centre m\u00e9dical de recherche et de prise en charge sp\u00e9cialis\u00e9e de la lithiase urinaire.", "en": "Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "es": "[ES] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "pt": "[PT] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "it": "[IT] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "de": "[DE] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "ar": "[AR] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "zh": "[ZH] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "ja": "[JA] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis.", "ko": "[KO] Design of the portal for the Medical Center for Research and Specialized Care of Urinary Lithiasis."},
+                    "icon_class": "fa-heartbeat",
                     "color_class": "blue-500",
-                    "order": 1
+                    "link": "https://centrelithiasetshatshi.com",
+                    "order": 0
                 },
                 {
-                    "title": {
-                        "fr": "J'ai Besoin d'Aide",
-                        "en": "I Need Help",
-                        "es": "Necesito Ayuda",
-                        "pt": "Preciso de Ajuda",
-                        "it": "Ho Bisogno di Aiuto",
-                        "de": "Ich Brauche Hilfe",
-                        "ar": "أحتاج مساعدة",
-                        "zh": "我需要帮助",
-                        "ja": "助けが必要です",
-                        "ko": "도움이 필요합니다"
-                    },
-                    "description": {
-                        "fr": "Développement d'une plateforme à fort impact communautaire dédiée à la mise en relation et à l'entraide sociale.",
-                        "en": "Development of a high-impact community platform dedicated to networking and social mutual aid.",
-                        "es": "Desarrollo de una plataforma comunitaria de alto impacto dedicada a la conexión y la ayuda mutua social.",
-                        "pt": "Desenvolvimento de uma plataforma comunitária de alto impacto dedicada ao networking e ajuda mútua social.",
-                        "it": "Sviluppo di una piattaforma comunitaria ad alto impatto dedicata al networking e all'aiuto reciproco sociale.",
-                        "de": "Entwicklung einer hochwirksamen Community-Plattform für Vernetzung und soziale gegenseitige Hilfe.",
-                        "ar": "تطوير منصة مجتمعية ذات تأثير عالٍ مخصصة للتواصل والمساعدة المتبادلة الاجتماعية.",
-                        "zh": "开发一个致力于社交网络和社会互助的高影响力社区平台。",
-                        "ja": "ネットワーキングと社会的な相互支援に特化した、影響力の高いコミュニティプラットフォームの開発。",
-                        "ko": "네트워킹과 사회적 상호 지원에 전념하는 영향력 있는 커뮤니티 플랫폼 개발."
-                    },
-                    "link": "#",
-                    "icon_class": "fas fa-hands-helping",
-                    "color_class": "yellow-500",
-                    "order": 2
+                    "title": {"fr": "J'ai Besoin d'Aide", "en": "J'ai Besoin d'Aide", "es": "J'ai Besoin d'Aide", "pt": "J'ai Besoin d'Aide", "it": "J'ai Besoin d'Aide", "de": "J'ai Besoin d'Aide", "ar": "J'ai Besoin d'Aide", "zh": "J'ai Besoin d'Aide", "ja": "J'ai Besoin d'Aide", "ko": "J'ai Besoin d'Aide"},
+                    "description": {"fr": "Plateforme de soutien aux victimes dot\u00e9e d'un chat IA (SolangeBot) pour l'assistance rapide.", "en": "Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "es": "[ES] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "pt": "[PT] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "it": "[IT] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "de": "[DE] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "ar": "[AR] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "zh": "[ZH] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "ja": "[JA] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance.", "ko": "[KO] Victim support platform featuring an AI chat (SolangeBot) for rapid assistance."},
+                    "icon_class": "fa-hands-helping",
+                    "color_class": "pink-500",
+                    "link": "https://jaibesoindaide.org",
+                    "order": 10
                 },
                 {
-                    "title": {
-                        "fr": "LaCyberConfiance",
-                        "en": "LaCyberConfiance",
-                        "es": "LaCyberConfiance",
-                        "pt": "LaCyberConfiance",
-                        "it": "LaCyberConfiance",
-                        "de": "LaCyberConfiance",
-                        "ar": "LaCyberConfiance",
-                        "zh": "LaCyberConfiance",
-                        "ja": "LaCyberConfiance",
-                        "ko": "LaCyberConfiance"
-                    },
-                    "description": {
-                        "fr": "Direction de la plateforme de sensibilisation. Création du Vade-mecum de LaCyberConfiance, réalisation d'audits cyber et R&D d'outils d'IA pour la détection de menaces.",
-                        "en": "Direction of the awareness platform. Creation of the LaCyberConfiance Vade-mecum, conducting cyber audits and R&D of AI tools for threat detection.",
-                        "es": "Dirección de la plataforma de concientización. Creación del Vademécum de LaCyberConfiance, realización de auditorías cibernéticas e I+D de herramientas de IA para la detección de amenazas.",
-                        "pt": "Direção da plataforma de conscientização. Criação do Vade-mécum da LaCyberConfiance, realização de auditorias cibernéticas e P&D de ferramentas de IA para detecção de ameaças.",
-                        "it": "Direzione della piattaforma di sensibilizzazione. Creazione del Vademecum di LaCyberConfiance, conduzione di audit informatici e R&S di strumenti di intelligenza artificiale per il rilevamento delle minacce.",
-                        "de": "Leitung der Sensibilisierungsplattform. Erstellung des LaCyberConfiance Vademecums, Durchführung von Cyber-Audits und F&E von KI-Tools zur Bedrohungserkennung.",
-                        "ar": "إدارة منصة التوعية. إنشاء دليل LaCyberConfiance، وإجراء التدقيقات السيبرانية والبحث والتطوير لأدوات الذكاء الاصطناعي لاكتشاف التهديدات.",
-                        "zh": "管理意识平台。创建 LaCyberConfiance Vade-mecum，进行网络审计并研发用于威胁检测的 AI 工具。",
-                        "ja": "認識向上プラットフォームの指揮。LaCyberConfiance Vade-mecumの作成、サイバー監査の実施、および脅威検出のためのAIツールの研究開発。",
-                        "ko": "인식 플랫폼의 방향. LaCyberConfiance Vade-mecum 작성, 사이버 감사 수행 및 위협 탐지를 위한 AI 도구의 연구 개발."
-                    },
-                    "link": "https://www.cyberconfiance.com",
-                    "icon_class": "fas fa-shield-halved",
+                    "title": {"fr": "LaCyberConfiance", "en": "LaCyberConfiance", "es": "LaCyberConfiance", "pt": "LaCyberConfiance", "it": "LaCyberConfiance", "de": "LaCyberConfiance", "ar": "LaCyberConfiance", "zh": "LaCyberConfiance", "ja": "LaCyberConfiance", "ko": "LaCyberConfiance"},
+                    "description": {"fr": "Portail d\u00e9di\u00e9 \u00e0 la sensibilisation \u00e0 l'hygi\u00e8ne num\u00e9rique, audits et protection des donn\u00e9es.", "en": "Portal dedicated to digital hygiene awareness, audits, and data protection.", "es": "[ES] Portal dedicated to digital hygiene awareness, audits, and data protection.", "pt": "[PT] Portal dedicated to digital hygiene awareness, audits, and data protection.", "it": "[IT] Portal dedicated to digital hygiene awareness, audits, and data protection.", "de": "[DE] Portal dedicated to digital hygiene awareness, audits, and data protection.", "ar": "[AR] Portal dedicated to digital hygiene awareness, audits, and data protection.", "zh": "[ZH] Portal dedicated to digital hygiene awareness, audits, and data protection.", "ja": "[JA] Portal dedicated to digital hygiene awareness, audits, and data protection.", "ko": "[KO] Portal dedicated to digital hygiene awareness, audits, and data protection."},
+                    "icon_class": "fa-shield-alt",
+                    "color_class": "blue-600",
+                    "link": "https://cyberconfiance.com",
+                    "order": 20
+                },
+                {
+                    "title": {"fr": "Eric Hajjar", "en": "Eric Hajjar", "es": "Eric Hajjar", "pt": "Eric Hajjar", "it": "Eric Hajjar", "de": "Eric Hajjar", "ar": "Eric Hajjar", "zh": "Eric Hajjar", "ja": "Eric Hajjar", "ko": "Eric Hajjar"},
+                    "description": {"fr": "Conception d'un site vitrine et portfolio professionnel personnalis\u00e9 pour le Dr Eric Hajjar \u00e0 Marrakech.", "en": "Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "es": "[ES] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "pt": "[PT] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "it": "[IT] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "de": "[DE] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "ar": "[AR] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "zh": "[ZH] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "ja": "[JA] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech.", "ko": "[KO] Design of a showcase site and personalized professional portfolio for Dr. Eric Hajjar in Marrakech."},
+                    "icon_class": "fa-user-tie",
+                    "color_class": "amber-500",
+                    "link": "https://erichajjar.com",
+                    "order": 30
+                },
+                {
+                    "title": {"fr": "Ntanga", "en": "Ntanga", "es": "Ntanga", "pt": "Ntanga", "it": "Ntanga", "de": "Ntanga", "ar": "Ntanga", "zh": "Ntanga", "ja": "Ntanga", "ko": "Ntanga"},
+                    "description": {"fr": "Conception d'un site vitrine et portfolio professionnel personnalis\u00e9 pour le Prof. Jean de Dieu Ntita Ntanga du PDDDRC.", "en": "Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "es": "[ES] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "pt": "[PT] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "it": "[IT] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "de": "[DE] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "ar": "[AR] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "zh": "[ZH] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "ja": "[JA] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC.", "ko": "[KO] Design of a showcase site and personalized professional portfolio for Prof. Jean de Dieu Ntita Ntanga of PDDDRC."},
+                    "icon_class": "fa-shopping-bag",
+                    "color_class": "orange-500",
+                    "link": "https://ntanga.com",
+                    "order": 40
+                },
+                {
+                    "title": {"fr": "TFA ASBL", "en": "TFA ASBL", "es": "TFA ASBL", "pt": "TFA ASBL", "it": "TFA ASBL", "de": "TFA ASBL", "ar": "TFA ASBL", "zh": "TFA ASBL", "ja": "TFA ASBL", "ko": "TFA ASBL"},
+                    "description": {"fr": "D\u00e9veloppement de l'\u00e9cosyst\u00e8me num\u00e9rique institutionnel pour l'Association Sans But Lucratif TFA.", "en": "Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "es": "[ES] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "pt": "[PT] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "it": "[IT] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "de": "[DE] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "ar": "[AR] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "zh": "[ZH] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "ja": "[JA] Development of the institutional digital ecosystem for the Non-Profit Organization TFA.", "ko": "[KO] Development of the institutional digital ecosystem for the Non-Profit Organization TFA."},
+                    "icon_class": "fa-globe-africa",
                     "color_class": "emerald-500",
-                    "order": 3
-                }
+                    "link": "https://tfa-asbl.org",
+                    "order": 50
+                },
+                {
+                    "title": {"fr": "Shabaka InnovLab", "en": "Shabaka InnovLab", "es": "Shabaka InnovLab", "pt": "Shabaka InnovLab", "it": "Shabaka InnovLab", "de": "Shabaka InnovLab", "ar": "Shabaka InnovLab", "zh": "Shabaka InnovLab", "ja": "Shabaka InnovLab", "ko": "Shabaka InnovLab"},
+                    "description": {"fr": "Incubateur technologique et laboratoire d'innovation orient\u00e9 vers la R&D et l'Intelligence Artificielle.", "en": "Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "es": "[ES] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "pt": "[PT] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "it": "[IT] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "de": "[DE] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "ar": "[AR] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "zh": "[ZH] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "ja": "[JA] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence.", "ko": "[KO] Technological incubator and innovation laboratory oriented towards R&D and Artificial Intelligence."},
+                    "icon_class": "fa-flask",
+                    "color_class": "purple-500",
+                    "link": "https://shabakainnovlab.com",
+                    "order": 60
+                },
+                {
+                    "title": {"fr": "ClipFlow", "en": "ClipFlow", "es": "ClipFlow", "pt": "ClipFlow", "it": "ClipFlow", "de": "ClipFlow", "ar": "ClipFlow", "zh": "ClipFlow", "ja": "ClipFlow", "ko": "ClipFlow"},
+                    "description": {"fr": "Outil SaaS de traitement vid\u00e9o permettant de d\u00e9couper, fusionner et extraire du contenu m\u00e9dia.", "en": "SaaS video processing tool for cutting, merging, and extracting media content.", "es": "[ES] SaaS video processing tool for cutting, merging, and extracting media content.", "pt": "[PT] SaaS video processing tool for cutting, merging, and extracting media content.", "it": "[IT] SaaS video processing tool for cutting, merging, and extracting media content.", "de": "[DE] SaaS video processing tool for cutting, merging, and extracting media content.", "ar": "[AR] SaaS video processing tool for cutting, merging, and extracting media content.", "zh": "[ZH] SaaS video processing tool for cutting, merging, and extracting media content.", "ja": "[JA] SaaS video processing tool for cutting, merging, and extracting media content.", "ko": "[KO] SaaS video processing tool for cutting, merging, and extracting media content."},
+                    "icon_class": "fa-video",
+                    "color_class": "indigo-500",
+                    "link": "https://clipflow.site",
+                    "order": 70
+                },
+                {
+                    "title": {"fr": "Shabaka AdScreen", "en": "Shabaka AdScreen", "es": "Shabaka AdScreen", "pt": "Shabaka AdScreen", "it": "Shabaka AdScreen", "de": "Shabaka AdScreen", "ar": "Shabaka AdScreen", "zh": "Shabaka AdScreen", "ja": "Shabaka AdScreen", "ko": "Shabaka AdScreen"},
+                    "description": {"fr": "Plateforme AdTech avanc\u00e9e de r\u00e9servation et de gestion d'\u00e9crans publicitaires (DOOH).", "en": "Advanced AdTech platform for booking and managing advertising screens (DOOH).", "es": "[ES] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "pt": "[PT] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "it": "[IT] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "de": "[DE] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "ar": "[AR] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "zh": "[ZH] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "ja": "[JA] Advanced AdTech platform for booking and managing advertising screens (DOOH).", "ko": "[KO] Advanced AdTech platform for booking and managing advertising screens (DOOH)."},
+                    "icon_class": "fa-tv",
+                    "color_class": "cyan-500",
+                    "link": "https://shabaka-adscreen.com",
+                    "order": 80
+                },
+                {
+                    "title": {"fr": "Disparus.org", "en": "Disparus.org", "es": "Disparus.org", "pt": "Disparus.org", "it": "Disparus.org", "de": "Disparus.org", "ar": "Disparus.org", "zh": "Disparus.org", "ja": "Disparus.org", "ko": "Disparus.org"},
+                    "description": {"fr": "Plateforme associative et communautaire facilitant les recherches de personnes port\u00e9es disparues.", "en": "Associative and community platform facilitating searches for missing persons.", "es": "[ES] Associative and community platform facilitating searches for missing persons.", "pt": "[PT] Associative and community platform facilitating searches for missing persons.", "it": "[IT] Associative and community platform facilitating searches for missing persons.", "de": "[DE] Associative and community platform facilitating searches for missing persons.", "ar": "[AR] Associative and community platform facilitating searches for missing persons.", "zh": "[ZH] Associative and community platform facilitating searches for missing persons.", "ja": "[JA] Associative and community platform facilitating searches for missing persons.", "ko": "[KO] Associative and community platform facilitating searches for missing persons."},
+                    "icon_class": "fa-search",
+                    "color_class": "red-500",
+                    "link": "https://disparus.org",
+                    "order": 90
+                },
+                {
+                    "title": {"fr": "Shabaka Invest Group", "en": "Shabaka Invest Group", "es": "Shabaka Invest Group", "pt": "Shabaka Invest Group", "it": "Shabaka Invest Group", "de": "Shabaka Invest Group", "ar": "Shabaka Invest Group", "zh": "Shabaka Invest Group", "ja": "Shabaka Invest Group", "ko": "Shabaka Invest Group"},
+                    "description": {"fr": "Vitrine num\u00e9rique et corporative pour un groupe d'investissement financier \u00e0 forte valeur ajout\u00e9e.", "en": "Digital and corporate showcase for a high value-added financial investment group.", "es": "[ES] Digital and corporate showcase for a high value-added financial investment group.", "pt": "[PT] Digital and corporate showcase for a high value-added financial investment group.", "it": "[IT] Digital and corporate showcase for a high value-added financial investment group.", "de": "[DE] Digital and corporate showcase for a high value-added financial investment group.", "ar": "[AR] Digital and corporate showcase for a high value-added financial investment group.", "zh": "[ZH] Digital and corporate showcase for a high value-added financial investment group.", "ja": "[JA] Digital and corporate showcase for a high value-added financial investment group.", "ko": "[KO] Digital and corporate showcase for a high value-added financial investment group."},
+                    "icon_class": "fa-chart-pie",
+                    "color_class": "green-500",
+                    "link": "https://shabakainvestgroup.com",
+                    "order": 100
+                },
+                {
+                    "title": {"fr": "Urgence Gabon", "en": "Urgence Gabon", "es": "Urgence Gabon", "pt": "Urgence Gabon", "it": "Urgence Gabon", "de": "Urgence Gabon", "ar": "Urgence Gabon", "zh": "Urgence Gabon", "ja": "Urgence Gabon", "ko": "Urgence Gabon"},
+                    "description": {"fr": "Portail d\u00e9di\u00e9 \u00e0 l'assistance rapide, aux urgences m\u00e9dicales et aux secours sur le territoire gabonais.", "en": "Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "es": "[ES] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "pt": "[PT] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "it": "[IT] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "de": "[DE] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "ar": "[AR] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "zh": "[ZH] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "ja": "[JA] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory.", "ko": "[KO] Portal dedicated to rapid assistance, medical emergencies, and rescue in the Gabonese territory."},
+                    "icon_class": "fa-ambulance",
+                    "color_class": "rose-500",
+                    "link": "https://urgencegabon.com",
+                    "order": 110
+                },
+                {
+                    "title": {"fr": "Taalentio", "en": "Taalentio", "es": "Taalentio", "pt": "Taalentio", "it": "Taalentio", "de": "Taalentio", "ar": "Taalentio", "zh": "Taalentio", "ja": "Taalentio", "ko": "Taalentio"},
+                    "description": {"fr": "Plateforme innovante de mise en relation B2B/B2C, d\u00e9di\u00e9e au recrutement et aux Ressources Humaines.", "en": "Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "es": "[ES] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "pt": "[PT] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "it": "[IT] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "de": "[DE] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "ar": "[AR] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "zh": "[ZH] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "ja": "[JA] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources.", "ko": "[KO] Innovative B2B/B2C matchmaking platform dedicated to recruitment and Human Resources."},
+                    "icon_class": "fa-users",
+                    "color_class": "violet-500",
+                    "link": "https://taalentio.com",
+                    "order": 120
+                },
+                {
+                    "title": {"fr": "Villa \u00e0 Vendre Marrakech", "en": "Villa \u00e0 Vendre Marrakech", "es": "Villa \u00e0 Vendre Marrakech", "pt": "Villa \u00e0 Vendre Marrakech", "it": "Villa \u00e0 Vendre Marrakech", "de": "Villa \u00e0 Vendre Marrakech", "ar": "Villa \u00e0 Vendre Marrakech", "zh": "Villa \u00e0 Vendre Marrakech", "ja": "Villa \u00e0 Vendre Marrakech", "ko": "Villa \u00e0 Vendre Marrakech"},
+                    "description": {"fr": "Site d'annonces immobili\u00e8res premium, centr\u00e9 sur la vente de villas de luxe \u00e0 Marrakech.", "en": "Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "es": "[ES] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "pt": "[PT] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "it": "[IT] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "de": "[DE] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "ar": "[AR] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "zh": "[ZH] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "ja": "[JA] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech.", "ko": "[KO] Premium real estate classifieds site, focused on the sale of luxury villas in Marrakech."},
+                    "icon_class": "fa-home",
+                    "color_class": "stone-500",
+                    "link": "https://villaavendremarrakech.com",
+                    "order": 130
+                },
+                {
+                    "title": {"fr": "Transfert Space", "en": "Transfert Space", "es": "Transfert Space", "pt": "Transfert Space", "it": "Transfert Space", "de": "Transfert Space", "ar": "Transfert Space", "zh": "Transfert Space", "ja": "Transfert Space", "ko": "Transfert Space"},
+                    "description": {"fr": "Micro web app de mise en relation pour le transfert d'argent dite peer to peer, de personne \u00e0 personne.", "en": "Micro web app for peer-to-peer money transfer matchmaking.", "es": "[ES] Micro web app for peer-to-peer money transfer matchmaking.", "pt": "[PT] Micro web app for peer-to-peer money transfer matchmaking.", "it": "[IT] Micro web app for peer-to-peer money transfer matchmaking.", "de": "[DE] Micro web app for peer-to-peer money transfer matchmaking.", "ar": "[AR] Micro web app for peer-to-peer money transfer matchmaking.", "zh": "[ZH] Micro web app for peer-to-peer money transfer matchmaking.", "ja": "[JA] Micro web app for peer-to-peer money transfer matchmaking.", "ko": "[KO] Micro web app for peer-to-peer money transfer matchmaking."},
+                    "icon_class": "fa-cloud-upload-alt",
+                    "color_class": "sky-500",
+                    "link": "https://transfert.space",
+                    "order": 140
+                },
             ]
 
-            for item_data in items:
+            # Insertion dans la base de données
+            for item_data in items_to_insert:
                 new_item = PortfolioItem(
                     title=item_data["title"],
                     description=item_data["description"],
-                    link=item_data["link"],
                     icon_class=item_data["icon_class"],
                     color_class=item_data["color_class"],
-                    order=item_data.get("order", 0)
+                    link=item_data["link"],
+                    order=item_data["order"],
+                    is_active=True
                 )
                 db.session.add(new_item)
 
-            # Commit the changes securely
             db.session.commit()
             print("Les réalisations du portfolio ont été initialisées avec succès dans la base de données !")
 
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Une erreur base de données est survenue : {e}")
         except Exception as e:
-            # Rollback in case of an error to keep the database in a consistent state
             db.session.rollback()
             print(f"Une erreur est survenue lors de l'initialisation du portfolio : {e}")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     init_demo_portfolio()
