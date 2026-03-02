@@ -6,3 +6,5 @@ env/
 .pytest_cache/
 server_log.txt
 aisancekalonji.db
+instance/
+*.log
