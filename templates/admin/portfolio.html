@@ -4,84 +4,86 @@
 
 {% block content %}
 <div class="mb-6 flex justify-between items-center">
-    <h2 class="text-2xl font-bold text-gray-800">Projets</h2>
-    <a href="{{ url_for('admin.portfolio_add') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow">
+    <h2 class="text-2xl font-bold text-gray-200">Projets</h2>
+    <a href="{{ url_for('admin.portfolio_add') }}" class="bg-accent hover:bg-accent/80 text-white font-bold py-2 px-4 rounded-xl shadow-lg transition-colors">
         Ajouter un projet
     </a>
 </div>
 
-<div class="bg-white shadow-md rounded my-6 overflow-x-auto">
-    <table class="min-w-full leading-normal">
-        <thead>
-            <tr>
-                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Titre
-                </th>
-                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Icône & Couleur
-                </th>
-                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Lien
-                </th>
-                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Statut
-                </th>
-                <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p class="text-gray-900 whitespace-no-wrap font-semibold">{{ item.title }}</p>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span class="inline-block p-2 rounded {{ item.color_class }}">
-                        <i class="fas {{ item.icon_class }}"></i>
-                    </span>
-                    <span class="ml-2 text-gray-600 text-xs">{{ item.icon_class }}</span>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    {% if item.link %}
-                    <a href="{{ item.link }}" target="_blank" class="text-blue-500 hover:text-blue-800">{{ item.link }}</a>
-                    {% else %}
-                    <span class="text-gray-500 italic">Aucun</span>
-                    {% endif %}
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <span class="relative inline-block px-3 py-1 font-semibold {% if item.is_active %}text-green-900{% else %}text-red-900{% endif %} leading-tight">
-                        <span aria-hidden class="absolute inset-0 {% if item.is_active %}bg-green-200{% else %}bg-red-200{% endif %} opacity-50 rounded-full"></span>
-                        <span class="relative">{% if item.is_active %}Actif{% else %}Inactif{% endif %}</span>
-                    </span>
-                </td>
-                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div class="flex items-center space-x-3">
-                        <a href="{{ url_for('admin.portfolio_edit', id=item.id) }}" class="text-blue-600 hover:text-blue-900">
-                            Éditer
-                        </a>
-                        <form action="{{ url_for('admin.portfolio_toggle', id=item.id) }}" method="POST" class="inline">
-                            <button type="submit" class="text-yellow-600 hover:text-yellow-900">
-                                {% if item.is_active %}Désactiver{% else %}Activer{% endif %}
-                            </button>
-                        </form>
-                        <form action="{{ url_for('admin.portfolio_delete', id=item.id) }}" method="POST" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');">
-                            <button type="submit" class="text-red-600 hover:text-red-900">
-                                Supprimer
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            {% else %}
-            <tr>
-                <td colspan="5" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                    <p class="text-gray-500 italic">Aucun projet trouvé.</p>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="glass-premium bg-white/5 border border-white/10 rounded-[32px] my-6 overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="min-w-full leading-normal admin-table">
+            <thead>
+                <tr>
+                    <th class="px-5 py-3 border-b-2 border-white/10 bg-black/20 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                        Titre
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-white/10 bg-black/20 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                        Icône & Couleur
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-white/10 bg-black/20 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                        Lien
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-white/10 bg-black/20 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                        Statut
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-white/10 bg-black/20 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="px-5 py-5 border-b border-white/10 text-sm">
+                        <p class="text-gray-200 whitespace-no-wrap font-semibold">{{ item.title }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-white/10 text-sm">
+                        <span class="inline-block p-2 rounded {{ item.color_class }}">
+                            <i class="fas {{ item.icon_class }}"></i>
+                        </span>
+                        <span class="ml-2 text-gray-400 text-xs">{{ item.icon_class }}</span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-white/10 text-sm">
+                        {% if item.link %}
+                        <a href="{{ item.link }}" target="_blank" class="text-accent hover:text-accent/80">{{ item.link }}</a>
+                        {% else %}
+                        <span class="text-gray-500 italic">Aucun</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-5 py-5 border-b border-white/10 text-sm">
+                        <span class="relative inline-block px-3 py-1 font-semibold {% if item.is_active %}text-emerald-400{% else %}text-red-400{% endif %} leading-tight">
+                            <span aria-hidden class="absolute inset-0 {% if item.is_active %}bg-emerald-500/20 border border-emerald-500/30{% else %}bg-red-500/20 border border-red-500/30{% endif %} rounded-full"></span>
+                            <span class="relative">{% if item.is_active %}Actif{% else %}Inactif{% endif %}</span>
+                        </span>
+                    </td>
+                    <td class="px-5 py-5 border-b border-white/10 text-sm">
+                        <div class="flex items-center space-x-3">
+                            <a href="{{ url_for('admin.portfolio_edit', id=item.id) }}" class="text-blue-400 hover:text-blue-300">
+                                Éditer
+                            </a>
+                            <form action="{{ url_for('admin.portfolio_toggle', id=item.id) }}" method="POST" class="inline">
+                                <button type="submit" class="text-yellow-400 hover:text-yellow-300">
+                                    {% if item.is_active %}Désactiver{% else %}Activer{% endif %}
+                                </button>
+                            </form>
+                            <form action="{{ url_for('admin.portfolio_delete', id=item.id) }}" method="POST" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');">
+                                <button type="submit" class="text-red-400 hover:text-red-300">
+                                    Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="px-5 py-5 border-b border-white/10 text-sm text-center">
+                        <p class="text-gray-500 italic">Aucun projet trouvé.</p>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
