@@ -117,6 +117,16 @@ def portfolio():
     items = PortfolioItem.query.order_by(PortfolioItem.order.asc()).all()
     return render_template('admin/portfolio.html', items=items)
 
+def format_icon_class(icon_class):
+    if not icon_class:
+        return icon_class
+    icon_class = icon_class.strip()
+    if not any(icon_class.startswith(prefix) for prefix in ['fas fa-', 'fab fa-', 'far fa-', 'fal fa-', 'fad fa-']):
+        if icon_class.startswith('fa-'):
+            return f'fas {icon_class}'
+        return f'fas fa-{icon_class}'
+    return icon_class
+
 @admin_bp.route('/portfolio/add', methods=['GET', 'POST'])
 @login_required
 def portfolio_add():
@@ -124,7 +134,7 @@ def portfolio_add():
         title_fr = request.form.get('title')
         description_fr = request.form.get('description')
         link = request.form.get('link')
-        icon_class = request.form.get('icon_class')
+        icon_class = format_icon_class(request.form.get('icon_class'))
         color_class = request.form.get('color_class')
         is_active = request.form.get('is_active') == 'on'
 
@@ -166,7 +176,7 @@ def portfolio_edit(id):
             item.description = update_json_field(item.description, description_fr)
 
         item.link = request.form.get('link')
-        item.icon_class = request.form.get('icon_class')
+        item.icon_class = format_icon_class(request.form.get('icon_class'))
         item.color_class = request.form.get('color_class')
         item.is_active = request.form.get('is_active') == 'on'
 

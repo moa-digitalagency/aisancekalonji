@@ -19,19 +19,14 @@
         {% for image in images %}
         <div class="glass-premium bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col h-full hover:bg-white/10 transition duration-200">
             <h3 class="text-lg font-semibold text-gray-200 mb-4 capitalize border-b border-white/10 pb-2">
-                {% if image.section_name == 'hero_light' %}
-                    Hero (Mode Clair)
-                {% elif image.section_name == 'hero_dark' %}
-                    Hero (Mode Sombre)
-                {% elif image.section_name == 'vision' %}
-                    Image Vision
-                {% elif image.section_name == 'book' %}
-                    Couverture du Livre
-                {% elif image.section_name == 'portrait' %}
-                    Image de Profil (Portrait)
-                {% else %}
-                    {{ image.section_name|replace('_', ' ') }}
-                {% endif %}
+                {% set image_labels = {
+                    'hero_light': 'Image Hero (Mode Clair)',
+                    'hero_dark': 'Image Hero (Mode Sombre)',
+                    'vision': 'Image Section Vision',
+                    'book': 'Image Couverture du Livre',
+                    'portrait': 'Image Section Consultation (Portrait)'
+                } %}
+                {{ image_labels.get(image.section_name, image.section_name|replace('_', ' ')) }}
             </h3>
 
             <div class="mb-4 flex-grow flex flex-col items-center justify-center bg-black/20 rounded-xl overflow-hidden border border-white/5 p-2 min-h-[200px]">
