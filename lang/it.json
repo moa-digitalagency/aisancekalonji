@@ -1,1 +1,87 @@
-{}
+{
+  "navbar": {
+    "vision": "[IT] Vision",
+    "expertise": "[IT] Expertise",
+    "experiences": "[IT] Expériences",
+    "realisations": "[IT] Réalisations",
+    "book_consultation": "[IT] Réserver une consultation"
+  },
+  "hero": {
+    "ceo": "[IT] CEO",
+    "lacyberconfiance": "[IT] LaCyberConfiance",
+    "ia_consultant": "[IT] Consultant IA",
+    "exp_years": "[IT] 15+",
+    "exp_text": "[IT] Ans Exp.",
+    "designer": "[IT] Designer",
+    "locations": "[IT] Marrakech · Kinshasa · Canada · USA",
+    "title_part1": "[IT] Façonner l'avenir",
+    "title_part2": "[IT] numérique africain.",
+    "subtitle": "[IT] 15 années d'expertise. Consultant en <strong>Transformation Digitale</strong>, <strong>Intelligence Artificielle</strong> et <strong>Cybersécurité</strong>, je conçois des écosystèmes technologiques résilients pour les entreprises ambitieuses.",
+    "btn_experiences": "[IT] Voir mes expériences",
+    "btn_expertise": "[IT] Mon expertise"
+  },
+  "vision": {
+    "title": "[IT] Un pont",
+    "title_light": "[IT] technologique.",
+    "p1": "[IT] Entrepreneur d'origine congolaise installé à Marrakech, j'agis comme un acteur d'innovation entre <strong>l'Afrique Centrale et le Maghreb.</strong> Fort de plus de 15 ans d'expérience, je déploie une vision technologique panafricaine qui connecte la RDC et le Maroc à des marchés tels que le Sénégal, le Gabon et l'Afrique du Sud.",
+    "p2": "[IT] Mon parcours pluridisciplinaire, alliant les sciences fondamentales à l'ingénierie NTIC, me permet de concevoir des écosystèmes complets. À travers Shabaka InnovLab et MOA Digital Agency, j'accompagne les entreprises dans leur transformation numérique 360°, de l'automatisation à l'intégration domotique.",
+    "p3": "[IT] Aujourd'hui, ma mission se déploie à travers la sensibilisation à l'hygiène numérique (LaCyberConfiance) et la recherche en Intelligence Artificielle (Shabaka InnovLab). Un engagement pour bâtir une souveraineté technologique forte et résiliente.",
+    "rd_ia": "[IT] R&D / IA",
+    "shabaka": "[IT] Shabaka InnovLab",
+    "cybersecurity": "[IT] Cybersécurité",
+    "entrepreneurship": "[IT] Entrepreneuriat",
+    "incubator": "[IT] Incubateur & Mentoring",
+    "social_projects": "[IT] Projets Sociaux",
+    "initiatives": "[IT] Initiatives & Communauté",
+    "direction_360": "[IT] Direction Digitale 360°",
+    "direction_360_desc": "[IT] Shabaka InnovLab et MOA Digital Agency"
+  },
+  "expertise": {
+    "title": "[IT] Domaines d'",
+    "title_light": "[IT] expertise.",
+    "subtitle": "[IT] Des solutions complètes allant de la sécurisation des infrastructures à la création d'agents autonomes, en passant par le design d'interfaces.",
+    "ai_data_title": "[IT] Intelligence Artificielle & Data",
+    "ai_data_desc": "[IT] Intégration de modèles LLM, conception d'architectures RAG et développement d'agents IA autonomes. Optimisation des processus métiers via des automatisations No-Code et des algorithmes Python. Prise de décision basée sur des métriques (Data-driven).",
+    "ai_tags": [
+      "[IT] LLM / RAG",
+      "[IT] Agents Autonomes",
+      "[IT] No-Code",
+      "[IT] Data-driven"
+    ],
+    "cyber_cloud_title": "[IT] Cyber & Cloud",
+    "cyber_cloud_desc": "[IT] Audits de sécurité, hygiène numérique en entreprise, OSINT (recherche de sources ouvertes) et maîtrise des infrastructures cloud.",
+    "cyber_tags": [
+      "[IT] AWS CLF-C02",
+      "[IT] Hygiène Num.",
+      "[IT] ISO 9001:2015"
+    ],
+    "fullstack_design_title": "[IT] Fullstack & Design Web",
+    "fullstack_design_desc": "[IT] Architecture web/mobile, identité visuelle, UI/UX, plateformes e-commerce et visualisation 3D.",
+    "fullstack_tags": [
+      "[IT] UI / UX Design",
+      "[IT] Python/Flask",
+      "[IT] Tailwind",
+      "[IT] E-commerce"
+    ],
+    "strategy_title": "[IT] Stratégie 360°, Marketing & Direction",
+    "strategy_desc": "[IT] Gestion de projets NTIC, intégration domotique, SEO, Google Search Console, et prospection B2B. Direction d'agence (MOA), accompagnement de startups en incubateur et formation.",
+    "strategy_tags": [
+      "[IT] SEO & Ads",
+      "[IT] Prospection",
+      "[IT] Domotique",
+      "[IT] Formation"
+    ]
+  },
+  "footer": {
+    "title": "[IT] Une idée ? Un projet ?",
+    "title_light": "[IT] Discutons-en.",
+    "btn_consultation": "[IT] Consultation gratuite",
+    "location_title": "[IT] Localisation",
+    "location_1": "[IT] Marrakech, Maroc",
+    "location_2": "[IT] Kinshasa, RDC",
+    "platforms_title": "[IT] Plateformes",
+    "legal_title": "[IT] Légal",
+    "rights": "[IT] Tous droits réservés.",
+    "made_with": "[IT] Fait avec ☕️ et ❤️ Par InnovLab."
+  }
+}
