@@ -8,7 +8,7 @@
   },
   "hero": {
     "ceo": "CEO",
-    "lacyberconfiance": "LaCyberConfiance",
+    "lacyberconfiance": "LaCyberConfidence",
     "ia_consultant": "AI Consultant",
     "exp_years": "15+",
     "exp_text": "Yrs Exp.",
@@ -42,16 +42,35 @@
     "subtitle": "Complete solutions ranging from infrastructure securing to the creation of autonomous agents, including interface design.",
     "ai_data_title": "Artificial Intelligence & Data",
     "ai_data_desc": "Integration of LLM models, design of RAG architectures and development of autonomous AI agents. Optimization of business processes via No-Code automations and Python algorithms. Decision making based on metrics (Data-driven).",
-    "ai_tags": ["LLM / RAG", "Autonomous Agents", "No-Code", "Data-driven"],
-    "cyber_cloud_title": "Cyber & Cloud",
+    "ai_tags": [
+      "LLM / RAG",
+      "Autonomous Agents",
+      "No-Code",
+      "Data-driven"
+    ],
+    "cyber_cloud_title": "Cyber ​​& Cloud",
     "cyber_cloud_desc": "Security audits, digital hygiene in business, OSINT (open source intelligence) and mastery of cloud infrastructures.",
-    "cyber_tags": ["AWS CLF-C02", "Digital Hygiene", "ISO 9001:2015"],
+    "cyber_tags": [
+      "AWS CLF-C02",
+      "Digital Hygiene",
+      "ISO 9001:2015"
+    ],
     "fullstack_design_title": "Fullstack & Web Design",
     "fullstack_design_desc": "Web/mobile architecture, visual identity, UI/UX, e-commerce platforms and 3D visualization.",
-    "fullstack_tags": ["UI / UX Design", "Python/Flask", "Tailwind", "E-commerce"],
+    "fullstack_tags": [
+      "UI/UX Design",
+      "Python/Flask",
+      "Tailwind",
+      "E-commerce"
+    ],
     "strategy_title": "360° Strategy, Marketing & Direction",
     "strategy_desc": "ICT project management, home automation integration, SEO, Google Search Console, and B2B prospection. Agency direction (MOA), support for startups in incubators and training.",
-    "strategy_tags": ["SEO & Ads", "Prospection", "Home Automation", "Training"]
+    "strategy_tags": [
+      "SEO & Ads",
+      "Prospecting",
+      "Home Automation",
+      "Training"
+    ]
   },
   "footer": {
     "title": "An idea? A project?",
