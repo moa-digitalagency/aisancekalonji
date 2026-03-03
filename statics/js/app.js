@@ -73,16 +73,14 @@
 
         // Changement de drapeau au clic sur une langue
         langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                // MISE À JOUR : On récupère uniquement le drapeau via l'attribut data-flag
-                currentLangFlag.textContent = option.getAttribute('data-flag');
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
 
                 langDropdown.classList.add('invisible', 'opacity-0', 'translate-y-2');
                 langDropdown.classList.remove('opacity-100', 'translate-y-0');
 
-                // Ici viendra la future logique pour changer la langue du site
-                // const selectedLang = option.getAttribute('data-lang');
-                // changeLanguage(selectedLang);
+                const selectedLang = option.getAttribute('data-lang');
+                window.location.href = '/set_lang/' + selectedLang;
             });
         });
 

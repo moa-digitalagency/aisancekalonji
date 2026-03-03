@@ -148,17 +148,6 @@
                             </button>
                         </div>
                     </div>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', () => {
-                            const langOptions = document.querySelectorAll('.lang-option');
-                            langOptions.forEach(option => {
-                                option.addEventListener('click', (e) => {
-                                    e.preventDefault();
-                                    window.location.href = '/set_lang/' + option.dataset.lang;
-                                });
-                            });
-                        });
-                    </script>
 
                     <!-- Bouton Theme Toggle -->
                     <button id="theme-toggle" class="w-10 h-10 rounded-full glass-premium flex items-center justify-center text-adaptive hover:scale-110 transition-transform" aria-label="Toggle Dark Mode">
