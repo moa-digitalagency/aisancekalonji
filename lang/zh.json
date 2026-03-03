@@ -1,1 +1,87 @@
-{}
+{
+  "navbar": {
+    "vision": "[ZH] Vision",
+    "expertise": "[ZH] Expertise",
+    "experiences": "[ZH] Expériences",
+    "realisations": "[ZH] Réalisations",
+    "book_consultation": "[ZH] Réserver une consultation"
+  },
+  "hero": {
+    "ceo": "[ZH] CEO",
+    "lacyberconfiance": "[ZH] LaCyberConfiance",
+    "ia_consultant": "[ZH] Consultant IA",
+    "exp_years": "[ZH] 15+",
+    "exp_text": "[ZH] Ans Exp.",
+    "designer": "[ZH] Designer",
+    "locations": "[ZH] Marrakech · Kinshasa · Canada · USA",
+    "title_part1": "[ZH] Façonner l'avenir",
+    "title_part2": "[ZH] numérique africain.",
+    "subtitle": "[ZH] 15 années d'expertise. Consultant en <strong>Transformation Digitale</strong>, <strong>Intelligence Artificielle</strong> et <strong>Cybersécurité</strong>, je conçois des écosystèmes technologiques résilients pour les entreprises ambitieuses.",
+    "btn_experiences": "[ZH] Voir mes expériences",
+    "btn_expertise": "[ZH] Mon expertise"
+  },
+  "vision": {
+    "title": "[ZH] Un pont",
+    "title_light": "[ZH] technologique.",
+    "p1": "[ZH] Entrepreneur d'origine congolaise installé à Marrakech, j'agis comme un acteur d'innovation entre <strong>l'Afrique Centrale et le Maghreb.</strong> Fort de plus de 15 ans d'expérience, je déploie une vision technologique panafricaine qui connecte la RDC et le Maroc à des marchés tels que le Sénégal, le Gabon et l'Afrique du Sud.",
+    "p2": "[ZH] Mon parcours pluridisciplinaire, alliant les sciences fondamentales à l'ingénierie NTIC, me permet de concevoir des écosystèmes complets. À travers Shabaka InnovLab et MOA Digital Agency, j'accompagne les entreprises dans leur transformation numérique 360°, de l'automatisation à l'intégration domotique.",
+    "p3": "[ZH] Aujourd'hui, ma mission se déploie à travers la sensibilisation à l'hygiène numérique (LaCyberConfiance) et la recherche en Intelligence Artificielle (Shabaka InnovLab). Un engagement pour bâtir une souveraineté technologique forte et résiliente.",
+    "rd_ia": "[ZH] R&D / IA",
+    "shabaka": "[ZH] Shabaka InnovLab",
+    "cybersecurity": "[ZH] Cybersécurité",
+    "entrepreneurship": "[ZH] Entrepreneuriat",
+    "incubator": "[ZH] Incubateur & Mentoring",
+    "social_projects": "[ZH] Projets Sociaux",
+    "initiatives": "[ZH] Initiatives & Communauté",
+    "direction_360": "[ZH] Direction Digitale 360°",
+    "direction_360_desc": "[ZH] Shabaka InnovLab et MOA Digital Agency"
+  },
+  "expertise": {
+    "title": "[ZH] Domaines d'",
+    "title_light": "[ZH] expertise.",
+    "subtitle": "[ZH] Des solutions complètes allant de la sécurisation des infrastructures à la création d'agents autonomes, en passant par le design d'interfaces.",
+    "ai_data_title": "[ZH] Intelligence Artificielle & Data",
+    "ai_data_desc": "[ZH] Intégration de modèles LLM, conception d'architectures RAG et développement d'agents IA autonomes. Optimisation des processus métiers via des automatisations No-Code et des algorithmes Python. Prise de décision basée sur des métriques (Data-driven).",
+    "ai_tags": [
+      "[ZH] LLM / RAG",
+      "[ZH] Agents Autonomes",
+      "[ZH] No-Code",
+      "[ZH] Data-driven"
+    ],
+    "cyber_cloud_title": "[ZH] Cyber & Cloud",
+    "cyber_cloud_desc": "[ZH] Audits de sécurité, hygiène numérique en entreprise, OSINT (recherche de sources ouvertes) et maîtrise des infrastructures cloud.",
+    "cyber_tags": [
+      "[ZH] AWS CLF-C02",
+      "[ZH] Hygiène Num.",
+      "[ZH] ISO 9001:2015"
+    ],
+    "fullstack_design_title": "[ZH] Fullstack & Design Web",
+    "fullstack_design_desc": "[ZH] Architecture web/mobile, identité visuelle, UI/UX, plateformes e-commerce et visualisation 3D.",
+    "fullstack_tags": [
+      "[ZH] UI / UX Design",
+      "[ZH] Python/Flask",
+      "[ZH] Tailwind",
+      "[ZH] E-commerce"
+    ],
+    "strategy_title": "[ZH] Stratégie 360°, Marketing & Direction",
+    "strategy_desc": "[ZH] Gestion de projets NTIC, intégration domotique, SEO, Google Search Console, et prospection B2B. Direction d'agence (MOA), accompagnement de startups en incubateur et formation.",
+    "strategy_tags": [
+      "[ZH] SEO & Ads",
+      "[ZH] Prospection",
+      "[ZH] Domotique",
+      "[ZH] Formation"
+    ]
+  },
+  "footer": {
+    "title": "[ZH] Une idée ? Un projet ?",
+    "title_light": "[ZH] Discutons-en.",
+    "btn_consultation": "[ZH] Consultation gratuite",
+    "location_title": "[ZH] Localisation",
+    "location_1": "[ZH] Marrakech, Maroc",
+    "location_2": "[ZH] Kinshasa, RDC",
+    "platforms_title": "[ZH] Plateformes",
+    "legal_title": "[ZH] Légal",
+    "rights": "[ZH] Tous droits réservés.",
+    "made_with": "[ZH] Fait avec ☕️ et ❤️ Par InnovLab."
+  }
+}
