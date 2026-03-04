@@ -10,9 +10,11 @@ from models.base import db
 
 admin_bp = Blueprint('admin', __name__)
 
-def update_json_field(current_value, new_value_fr):
+def update_json_field(current_value, new_value_fr, all_langs=None):
     """
-    Updates a JSON field with a new French value.
+    Updates a JSON field. If all_langs is provided, it updates all languages
+    and falls back to French if a translation is missing or empty.
+    If only new_value_fr is provided, it updates just the French value.
     If current_value is None or not a dict, initializes it as a dict.
     Preserves other language keys if they exist.
     """
@@ -25,9 +27,24 @@ def update_json_field(current_value, new_value_fr):
         # Duplicate the dictionary so SQLAlchemy detects the change
         current_value = dict(current_value)
 
-    # We update the 'fr' key specifically as the admin interface is in French
-    if new_value_fr is not None:
-        current_value['fr'] = new_value_fr
+    if all_langs is not None:
+        fr_val = all_langs.get('fr', '').strip()
+        if not fr_val and new_value_fr is not None:
+            fr_val = new_value_fr
+
+        current_value['fr'] = fr_val
+
+        langs = ['en', 'es', 'pt', 'it', 'de', 'ar', 'zh', 'ja', 'ko']
+        for lang in langs:
+            val = all_langs.get(lang, '').strip()
+            if val:
+                current_value[lang] = val
+            elif not current_value.get(lang): # Only fallback if it doesn't already have a valid translation
+                current_value[lang] = fr_val
+    else:
+        # We update the 'fr' key specifically as the admin interface is in French
+        if new_value_fr is not None:
+            current_value['fr'] = new_value_fr
 
     return current_value
 
@@ -235,19 +252,17 @@ def book():
         book_section = None
 
     if request.method == 'POST' and book_section:
-        title_fr = request.form.get('title')
-        subtitle_fr = request.form.get('subtitle')
-        description_fr = request.form.get('description')
-        cta_text_fr = request.form.get('cta_text')
+        langs = ['fr', 'en', 'es', 'pt', 'it', 'de', 'ar', 'zh', 'ja', 'ko']
 
-        if title_fr is not None:
-            book_section.title = update_json_field(book_section.title, title_fr)
-        if subtitle_fr is not None:
-            book_section.subtitle = update_json_field(book_section.subtitle, subtitle_fr)
-        if description_fr is not None:
-            book_section.description = update_json_field(book_section.description, description_fr)
-        if cta_text_fr is not None:
-            book_section.cta_text = update_json_field(book_section.cta_text, cta_text_fr)
+        title_langs = {lang: request.form.get(f'title_{lang}', '') for lang in langs}
+        subtitle_langs = {lang: request.form.get(f'subtitle_{lang}', '') for lang in langs}
+        description_langs = {lang: request.form.get(f'description_{lang}', '') for lang in langs}
+        cta_text_langs = {lang: request.form.get(f'cta_text_{lang}', '') for lang in langs}
+
+        book_section.title = update_json_field(book_section.title, title_langs.get('fr'), all_langs=title_langs)
+        book_section.subtitle = update_json_field(book_section.subtitle, subtitle_langs.get('fr'), all_langs=subtitle_langs)
+        book_section.description = update_json_field(book_section.description, description_langs.get('fr'), all_langs=description_langs)
+        book_section.cta_text = update_json_field(book_section.cta_text, cta_text_langs.get('fr'), all_langs=cta_text_langs)
 
         book_section.cta_link = request.form.get('cta_link')
 
