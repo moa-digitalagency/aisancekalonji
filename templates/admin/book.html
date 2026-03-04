@@ -7,33 +7,87 @@
     <h2 class="text-2xl font-bold text-white mb-6">Modifier la section Livre</h2>
 
     <form method="POST" action="{{ url_for('admin.book') }}" class="space-y-6">
-        <div>
-            <label for="title" class="block text-sm font-medium text-gray-200">Titre</label>
-            <p class="text-xs text-gray-400 mb-1">Vous pouvez utiliser des balises HTML basiques (ex: &lt;span class="text-accent"&gt;texte&lt;/span&gt;) pour la mise en forme.</p>
-            <input type="text" name="title" id="title" value="{{ book.title or '' }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+        {% set langs = [
+            ('fr', 'Français'), ('en', 'Anglais'), ('es', 'Espagnol'), ('pt', 'Portugais'),
+            ('it', 'Italien'), ('de', 'Allemand'), ('ar', 'Arabe'), ('zh', 'Chinois'),
+            ('ja', 'Japonais'), ('ko', 'Coréen')
+        ] %}
+
+        <!-- Tab Controls -->
+        <div class="border-b border-white/10 mb-6">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="lang-tabs" role="tablist">
+                {% for code, name in langs %}
+                <li class="mr-2" role="presentation">
+                    <button class="inline-block p-4 border-b-2 rounded-t-lg {{ 'border-accent text-accent' if loop.first else 'border-transparent text-gray-400 hover:text-gray-300 hover:border-gray-300' }}" id="tab-{{ code }}" data-target="panel-{{ code }}" type="button" role="tab">
+                        {{ name }} {{ '(Principal)' if loop.first else '' }}
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
 
-        <div>
-            <label for="subtitle" class="block text-sm font-medium text-gray-200">Sous-titre / Auteur</label>
-            <input type="text" name="subtitle" id="subtitle" value="{{ book.subtitle or '' }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
-        </div>
+        <!-- Tab Panels -->
+        <div id="tab-panels">
+            {% for code, name in langs %}
+            <div class="lang-panel {{ 'hidden' if not loop.first else '' }}" id="panel-{{ code }}" role="tabpanel">
+                <div class="space-y-6">
+                    <div>
+                        <label for="title_{{ code }}" class="block text-sm font-medium text-gray-200">Titre ({{ name }})</label>
+                        <p class="text-xs text-gray-400 mb-1">Vous pouvez utiliser des balises HTML basiques (ex: &lt;span class="text-accent"&gt;texte&lt;/span&gt;) pour la mise en forme.</p>
+                        <input type="text" name="title_{{ code }}" id="title_{{ code }}" value="{{ book.title.get(code, '') if book.title is mapping else (book.title if code == 'fr' else '') }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+                    </div>
 
-        <div>
-            <label for="description" class="block text-sm font-medium text-gray-200">Description</label>
-            <textarea name="description" id="description" rows="5" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">{{ book.description or '' }}</textarea>
-        </div>
+                    <div>
+                        <label for="subtitle_{{ code }}" class="block text-sm font-medium text-gray-200">Sous-titre / Auteur ({{ name }})</label>
+                        <input type="text" name="subtitle_{{ code }}" id="subtitle_{{ code }}" value="{{ book.subtitle.get(code, '') if book.subtitle is mapping else (book.subtitle if code == 'fr' else '') }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+                    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label for="cta_text" class="block text-sm font-medium text-gray-200">Texte du Bouton (CTA)</label>
-                <input type="text" name="cta_text" id="cta_text" value="{{ book.cta_text or '' }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+                    <div>
+                        <label for="description_{{ code }}" class="block text-sm font-medium text-gray-200">Description ({{ name }})</label>
+                        <textarea name="description_{{ code }}" id="description_{{ code }}" rows="5" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">{{ book.description.get(code, '') if book.description is mapping else (book.description if code == 'fr' else '') }}</textarea>
+                    </div>
+
+                    <div>
+                        <label for="cta_text_{{ code }}" class="block text-sm font-medium text-gray-200">Texte du Bouton (CTA) ({{ name }})</label>
+                        <input type="text" name="cta_text_{{ code }}" id="cta_text_{{ code }}" value="{{ book.cta_text.get(code, '') if book.cta_text is mapping else (book.cta_text if code == 'fr' else '') }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <label for="cta_link" class="block text-sm font-medium text-gray-200">Lien du Bouton (CTA)</label>
-                <input type="text" name="cta_link" id="cta_link" value="{{ book.cta_link or '' }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
-            </div>
+            {% endfor %}
         </div>
+
+        <div class="mt-6 pt-6 border-t border-white/10">
+            <label for="cta_link" class="block text-sm font-medium text-gray-200">Lien du Bouton (CTA) - Partagé pour toutes les langues</label>
+            <input type="text" name="cta_link" id="cta_link" value="{{ book.cta_link or '' }}" class="mt-1 block w-full rounded-xl bg-black/20 border border-white/10 text-white shadow-sm focus:border-accent focus:ring-accent sm:text-sm p-3">
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tabs = document.querySelectorAll('#lang-tabs button');
+                const panels = document.querySelectorAll('.lang-panel');
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        // Deactivate all tabs
+                        tabs.forEach(t => {
+                            t.classList.remove('border-accent', 'text-accent');
+                            t.classList.add('border-transparent', 'text-gray-400');
+                        });
+
+                        // Hide all panels
+                        panels.forEach(p => p.classList.add('hidden'));
+
+                        // Activate clicked tab
+                        tab.classList.remove('border-transparent', 'text-gray-400');
+                        tab.classList.add('border-accent', 'text-accent');
+
+                        // Show corresponding panel
+                        const targetId = tab.getAttribute('data-target');
+                        document.getElementById(targetId).classList.remove('hidden');
+                    });
+                });
+            });
+        </script>
 
         <div class="pt-4 border-t border-white/10 flex justify-end">
             <button type="submit" class="bg-accent/80 hover:bg-accent text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
