@@ -261,7 +261,7 @@
             <!-- LA VISION -->
             <section id="vision" class="relative py-24 md:py-32 w-full px-4 md:px-6 lg:px-12 max-w-7xl mx-auto">
                 <div class="text-center mb-16 md:mb-24 gs-reveal">
-                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-6 text-adaptive">Un pont <span class="text-adaptive-muted font-light">technologique.</span></h2>
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-6 text-adaptive">{{ t('vision.title') }} <span class="text-adaptive-muted font-light">{{ t('vision.title_light') }}</span></h2>
                     <div class="w-16 h-1 bg-accent mx-auto rounded-full"></div>
                 </div>
 
@@ -271,32 +271,32 @@
                         <div class="glass-premium p-8 md:p-10 rounded-[32px] relative overflow-hidden group">
                             <i class="fas fa-quote-left text-4xl text-accent/20 mb-6 block transition-transform group-hover:-translate-y-2"></i>
                             <p class="font-sans text-base md:text-lg leading-relaxed text-adaptive-muted font-light mb-4">
-                                Entrepreneur d'origine congolaise installé à Marrakech, j'agis comme un acteur d'innovation entre <strong class="text-adaptive font-medium">l'Afrique Centrale et le Maghreb.</strong> Fort de plus de 15 ans d'expérience, je déploie une vision technologique panafricaine qui connecte la RDC et le Maroc à des marchés tels que le Sénégal, le Gabon et l'Afrique du Sud.
+                                {{ t('vision.p1') | safe }}
                             </p>
                             <p class="font-sans text-base md:text-lg leading-relaxed text-adaptive-muted font-light mb-4">
-                                Mon parcours pluridisciplinaire, alliant les sciences fondamentales à l'ingénierie NTIC, me permet de concevoir des écosystèmes complets. À travers Shabaka InnovLab et MOA Digital Agency, j'accompagne les entreprises dans leur transformation numérique 360°, de l'automatisation à l'intégration domotique.
+                                {{ t('vision.p2') | safe }}
                             </p>
                             <p class="font-sans text-sm md:text-base leading-relaxed text-adaptive-muted font-light">
-                                Aujourd'hui, ma mission se déploie à travers la sensibilisation à l'hygiène numérique (LaCyberConfiance) et la recherche en Intelligence Artificielle (Shabaka InnovLab). Un engagement pour bâtir une souveraineté technologique forte et résiliente.
+                                {{ t('vision.p3') | safe }}
                             </p>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div class="glass-premium p-4 md:p-5 rounded-2xl flex items-center space-x-4 hover:scale-[1.02] transition-transform cursor-default">
                                 <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500"><i class="fas fa-microchip text-lg"></i></div>
-                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">R&D / IA</p><p class="text-sm font-medium text-adaptive">Shabaka InnovLab</p></div>
+                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">{{ t('vision.rd_ia') }}</p><p class="text-sm font-medium text-adaptive">{{ t('vision.shabaka') }}</p></div>
                             </div>
                             <div class="glass-premium p-4 md:p-5 rounded-2xl flex items-center space-x-4 hover:scale-[1.02] transition-transform cursor-default">
                                 <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent"><i class="fas fa-shield-halved text-lg"></i></div>
-                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">Cybersécurité</p><p class="text-sm font-medium text-adaptive">LaCyberConfiance</p></div>
+                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">{{ t('vision.cybersecurity') }}</p><p class="text-sm font-medium text-adaptive">LaCyberConfiance</p></div>
                             </div>
                             <div class="glass-premium p-4 md:p-5 rounded-2xl flex items-center space-x-4 hover:scale-[1.02] transition-transform cursor-default">
                                 <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500"><i class="fas fa-users text-lg"></i></div>
-                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">Entrepreneuriat</p><p class="text-sm font-medium text-adaptive">Incubateur & Mentoring</p></div>
+                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">{{ t('vision.entrepreneurship') }}</p><p class="text-sm font-medium text-adaptive">{{ t('vision.incubator') }}</p></div>
                             </div>
                             <div class="glass-premium p-4 md:p-5 rounded-2xl flex items-center space-x-4 hover:scale-[1.02] transition-transform cursor-default">
                                 <div class="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-500"><i class="fas fa-hands-helping text-lg"></i></div>
-                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">Projets Sociaux</p><p class="text-sm font-medium text-adaptive">Initiatives & Communauté</p></div>
+                                <div><p class="text-xs text-adaptive-muted font-mono mb-1">{{ t('vision.social_projects') }}</p><p class="text-sm font-medium text-adaptive">{{ t('vision.initiatives') }}</p></div>
                             </div>
                         </div>
                     </div>
@@ -311,8 +311,8 @@
 
                             <div class="absolute bottom-6 left-6 right-6 md:bottom-10 md:left-10 md:right-10 z-20">
                                 <div class="glass-premium p-5 md:p-6 rounded-2xl backdrop-blur-xl border-white/20 bg-white/5 dark:bg-black/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                                    <span class="font-display font-medium text-white text-base md:text-lg">Direction Digitale 360°</span>
-                                    <span class="font-mono text-xs text-white bg-white/20 px-4 py-2 rounded-full self-start sm:self-auto backdrop-blur-md text-center">Shabaka InnovLab et MOA Digital Agency</span>
+                                    <span class="font-display font-medium text-white text-base md:text-lg">{{ t('vision.direction_360') }}</span>
+                                    <span class="font-mono text-xs text-white bg-white/20 px-4 py-2 rounded-full self-start sm:self-auto backdrop-blur-md text-center">{{ t('vision.direction_360_desc') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -324,8 +324,8 @@
             <!-- MATRICE D'EXPERTISE -->
             <section id="expertise" class="relative py-32 w-full px-6 md:px-12 max-w-7xl mx-auto">
                 <div class="mb-20 md:w-2/3 gs-reveal">
-                    <h2 class="font-display text-4xl md:text-5xl font-medium mb-6 text-adaptive">Domaines d'<span class="text-adaptive-muted">expertise.</span></h2>
-                    <p class="font-sans text-adaptive-muted text-lg font-light">Des solutions complètes allant de la sécurisation des infrastructures à la création d'agents autonomes, en passant par le design d'interfaces.</p>
+                    <h2 class="font-display text-4xl md:text-5xl font-medium mb-6 text-adaptive">{{ t('expertise.title') }}<span class="text-adaptive-muted">{{ t('expertise.title_light') }}</span></h2>
+                    <p class="font-sans text-adaptive-muted text-lg font-light">{{ t('expertise.subtitle') }}</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -335,16 +335,15 @@
                             <div class="w-14 h-14 rounded-2xl glass-premium flex items-center justify-center mb-6 text-2xl text-purple-500 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-brain"></i>
                             </div>
-                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">Intelligence Artificielle & Data</h3>
+                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">{{ t('expertise.ai_data_title') }}</h3>
                             <p class="font-sans text-adaptive-muted font-light leading-relaxed">
-                                Intégration de modèles LLM, conception d'architectures RAG et développement d'agents IA autonomes. Optimisation des processus métiers via des automatisations No-Code et des algorithmes Python. Prise de décision basée sur des métriques (Data-driven).
+                                {{ t('expertise.ai_data_desc') }}
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">LLM / RAG</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Agents Autonomes</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">No-Code</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Data-driven</span>
+                            {% for tag in t('expertise.ai_tags') %}
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ tag }}</span>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -353,15 +352,15 @@
                             <div class="w-14 h-14 rounded-2xl glass-premium flex items-center justify-center mb-6 text-2xl text-accent group-hover:scale-110 transition-transform">
                                 <i class="fas fa-shield-halved"></i>
                             </div>
-                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">Cyber & Cloud</h3>
+                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">{{ t('expertise.cyber_cloud_title') }}</h3>
                             <p class="font-sans text-adaptive-muted font-light leading-relaxed">
-                                Audits de sécurité, hygiène numérique en entreprise, OSINT (recherche de sources ouvertes) et maîtrise des infrastructures cloud.
+                                {{ t('expertise.cyber_cloud_desc') }}
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">AWS CLF-C02</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Hygiène Num.</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">ISO 9001:2015</span>
+                            {% for tag in t('expertise.cyber_tags') %}
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ tag }}</span>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -370,30 +369,28 @@
                             <div class="w-14 h-14 rounded-2xl glass-premium flex items-center justify-center mb-6 text-2xl text-emerald-500 group-hover:scale-110 transition-transform">
                                 <i class="fas fa-layer-group"></i>
                             </div>
-                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">Fullstack & Design Web</h3>
+                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">{{ t('expertise.fullstack_design_title') }}</h3>
                             <p class="font-sans text-adaptive-muted font-light leading-relaxed">
-                                Architecture web/mobile, identité visuelle, UI/UX, plateformes e-commerce et visualisation 3D.
+                                {{ t('expertise.fullstack_design_desc') }}
                             </p>
                         </div>
                         <div class="relative z-10 flex flex-wrap gap-2">
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">UI / UX Design</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Python/Flask</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Tailwind</span>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">E-commerce</span>
+                            {% for tag in t('expertise.fullstack_tags') %}
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ tag }}</span>
+                            {% endfor %}
                         </div>
                     </div>
 
                     <div class="glass-premium rounded-[32px] p-10 lg:col-span-2 gs-reveal flex flex-col md:flex-row gap-8 justify-between items-center group">
                         <div class="flex-1">
-                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">Stratégie 360°, Marketing & Direction</h3>
+                            <h3 class="font-display text-2xl font-medium mb-4 text-adaptive">{{ t('expertise.strategy_title') }}</h3>
                             <p class="font-sans text-adaptive-muted font-light leading-relaxed mb-6">
-                                Gestion de projets NTIC, intégration domotique, SEO, Google Search Console, et prospection B2B. Direction d'agence (MOA), accompagnement de startups en incubateur et formation.
+                                {{ t('expertise.strategy_desc') }}
                             </p>
                             <div class="flex flex-wrap gap-2">
-                                <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">SEO & Ads</span>
-                                <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Prospection</span>
-                                <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Domotique</span>
-                                <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Formation</span>
+                                {% for tag in t('expertise.strategy_tags') %}
+                                <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ tag }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="w-16 h-16 rounded-full glass-premium flex items-center justify-center text-adaptive-muted group-hover:text-adaptive group-hover:scale-110 transition-all cursor-pointer mt-4 md:mt-0">
@@ -425,7 +422,7 @@
                                 <div class="w-12 h-12 rounded-full glass-premium flex items-center justify-center text-accent mb-6 shadow-xl">
                                     <i class="fas fa-shield-alt text-xl"></i>
                                 </div>
-                                <h3 class="font-display text-white text-3xl font-bold mb-3 leading-tight drop-shadow-lg">{{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else "Vade-mecum de la sécurité numérique" }}</h3>
+                                <h3 class="font-display text-white text-3xl font-bold mb-3 leading-tight drop-shadow-lg">{{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else t('vade_mecum.title') }}</h3>
                                 <div class="w-12 h-1 bg-accent rounded-full mb-6"></div>
                                 <p class="text-white/70 font-mono text-xs uppercase tracking-widest">{{ (book.subtitle | fallback_lang(session.get('lang', 'fr'))) if book else "Aisance Kalonji" }}</p>
                             </div>
@@ -438,22 +435,22 @@
                     <div class="relative z-10 lg:w-1/2 text-center lg:text-left">
                         <div class="inline-flex items-center px-4 py-2 rounded-full glass-premium mb-6 border border-accent/30 shadow-sm">
                             <i class="fas fa-book text-accent mr-3"></i>
-                            <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">Livre / Publication</span>
+                            <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">{{ t('vade_mecum.book_publication') }}</span>
                         </div>
                         <h2 class="font-display text-4xl md:text-5xl font-medium mb-6 text-adaptive leading-[1.1]">
-                            {{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else "Le Vade-mecum de la sécurité numérique" }}
+                            {{ (book.title | fallback_lang(session.get('lang', 'fr'))) if book else t('vade_mecum.title') }}
                         </h2>
                         <p class="font-sans text-adaptive-muted text-lg font-light mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                            {{ (book.description | fallback_lang(session.get('lang', 'fr'))) if book else "Un guide essentiel et pratique conçu pour démystifier l'hygiène numérique. À travers cet ouvrage, je partage des stratégies concrètes et des protocoles de sécurité pour protéger les actifs digitaux des entreprises et des particuliers face aux menaces modernes." }}
+                            {{ (book.description | fallback_lang(session.get('lang', 'fr'))) if book else t('vade_mecum.description') }}
                         </p>
                         <ul class="mb-10 space-y-4 font-sans text-adaptive-muted font-light text-left max-w-xl mx-auto lg:mx-0">
-                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>Audit de sécurité personnelle et professionnelle.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>Mise en place de bonnes pratiques d'hygiène numérique.</span></li>
-                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>Prévention active contre le social engineering.</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>{{ t('vade_mecum.point_1') }}</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>{{ t('vade_mecum.point_2') }}</span></li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-emerald-500 mt-1 mr-3"></i> <span>{{ t('vade_mecum.point_3') }}</span></li>
                         </ul>
                         <div class="flex flex-col sm:flex-row justify-center lg:justify-start">
                             <a href="{{ book.cta_link if book and book.cta_link else 'https://www.cyberconfiance.com' }}" target="_blank" rel="noopener noreferrer" class="btn-solid !px-8 !py-4 shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] !text-base transition-all inline-flex items-center group w-full sm:w-auto justify-center">
-                                {{ (book.cta_text | fallback_lang(session.get('lang', 'fr'))) if book and (book.cta_text | fallback_lang(session.get('lang', 'fr'))) else 'Obtenir mon exemplaire' }} <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                                {{ (book.cta_text | fallback_lang(session.get('lang', 'fr'))) if book and (book.cta_text | fallback_lang(session.get('lang', 'fr'))) else t('vade_mecum.btn_copy') }} <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                             </a>
                         </div>
                     </div>
@@ -464,92 +461,92 @@
             <!-- EXPERIENCES -->
             <section id="experiences" class="relative py-32 w-full px-6 md:px-12 max-w-7xl mx-auto border-t border-[var(--glass-border)]">
                 <div class="flex justify-between items-end mb-20 gs-reveal">
-                    <h2 class="font-display text-4xl md:text-5xl font-medium text-adaptive">Parcours & <br><span class="text-adaptive-muted">Expériences.</span></h2>
+                    <h2 class="font-display text-4xl md:text-5xl font-medium text-adaptive">{{ t('experiences.title') }} <br><span class="text-adaptive-muted">{{ t('experiences.title_light') }}</span></h2>
                 </div>
 
                 <div class="flex flex-col">
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-accent mb-3">Déc 2025 - Présent</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Cybersécurité</span>
+                            <div class="font-mono text-sm text-accent mb-3">{{ t('experiences.cyber_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.cyber_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">LaCyberConfiance</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Fondateur</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Direction de la plateforme de sensibilisation. Création du Vade-mecum de LaCyberConfiance, réalisation d'audits cyber et R&D d'outils d'IA pour la détection de menaces.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.cyber_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.cyber_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.cyber_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-purple-500 mb-3">Oct 2025 - Présent</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">R&D & Incubateur</span>
+                            <div class="font-mono text-sm text-purple-500 mb-3">{{ t('experiences.rd_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.rd_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">Shabaka InnovLab</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Chargé des projets NTIC & Associé VP</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Co-pilotage d'incubateur tech, conception de solutions NTIC et développement d'outils d'automatisation internes propulsés par l'Intelligence Artificielle.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.rd_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.rd_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.rd_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-blue-500 mb-3">Nov 2024 - Juil 2025</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">IA & Auto</span>
+                            <div class="font-mono text-sm text-blue-500 mb-3">{{ t('experiences.ai_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.ai_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">IAWEB.DEV</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Responsable Dpt. IA & Automatisation</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Développement et supervision de l'automatisation des processus internes et externes. Optimisation de la productivité via des solutions no-code et des agents IA.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.ai_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.ai_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.ai_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-emerald-500 mb-3">Sep 2022 - Présent</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Stratégie 360°</span>
+                            <div class="font-mono text-sm text-emerald-500 mb-3">{{ t('experiences.strategy_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.strategy_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">MOA Digital Agency</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">PDG & Directeur Général</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Gestion des opérations et stratégies 360°. Intégration domotique et développement numérique pour divers clients (Al Destino, Yono Group, Na'Palais). Projets nominés au COPA Kinshasa.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.strategy_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.strategy_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.strategy_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-orange-500 mb-3">Fév 2019 - Sep 2022</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">IT & Sécurité</span>
+                            <div class="font-mono text-sm text-orange-500 mb-3">{{ t('experiences.it_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.it_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">Henry Cath Marrakech</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Responsable S.I. et Marketing</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Maintenance des infrastructures IT, cybersécurité, vidéosurveillance et gestion complète de la plateforme web. Élaboration des stratégies de réseaux sociaux et photographie de produits.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.it_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.it_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.it_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-pink-500 mb-3">Déc 2017 - Juin 2018</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Ventes</span>
+                            <div class="font-mono text-sm text-pink-500 mb-3">{{ t('experiences.sales_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.sales_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">Domotique Maison Maroc</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Directeur des Ventes et Marketing</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Mise en place de stratégies marketing, prospection commerciale active et soutien technique pour des solutions de domotique résidentielle.</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.sales_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.sales_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.sales_desc') }}</p>
                         </div>
                     </div>
 
                     <div class="group relative py-10 border-b border-[var(--glass-border)] flex flex-col md:flex-row md:items-start justify-between gs-reveal transition-colors duration-500 hover:bg-[var(--glass-bg)] rounded-3xl px-4 md:px-8 -mx-4 md:-mx-8">
                         <div class="md:w-1/4 mb-4 md:mb-0 pt-1">
-                            <div class="font-mono text-sm text-yellow-500 mb-3">En continu</div>
-                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">Impact Social</span>
+                            <div class="font-mono text-sm text-yellow-500 mb-3">{{ t('experiences.impact_date') }}</div>
+                            <span class="px-3 py-1 glass-premium rounded-full text-xs font-mono text-adaptive">{{ t('experiences.impact_tag') }}</span>
                         </div>
                         <div class="md:w-3/4 md:pl-10 border-l border-transparent md:border-[var(--glass-border)]">
-                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">Initiatives Sociales & Impact</h3>
-                            <p class="font-sans text-adaptive font-medium mb-4">Mentor & Initiateur de projets</p>
-                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">Développement de plateformes à fort impact communautaire telles que « J'ai besoin d'aide » et « Escape with Locals ». Engagement dans la formation et l'accompagnement de la jeunesse (Certification Injaz Al Maghrib - Steer Your Career).</p>
+                            <h3 class="font-display text-2xl md:text-3xl font-medium text-adaptive mb-1">{{ t('experiences.impact_title') }}</h3>
+                            <p class="font-sans text-adaptive font-medium mb-4">{{ t('experiences.impact_role') }}</p>
+                            <p class="font-sans text-adaptive-muted font-light max-w-3xl leading-relaxed">{{ t('experiences.impact_desc') }}</p>
                         </div>
                     </div>
 
@@ -568,18 +565,18 @@
                     <div class="relative z-10 lg:w-1/2 text-center lg:text-left">
                         <div class="inline-flex items-center px-4 py-2 rounded-full glass-premium mb-6 border border-accent/30 shadow-lg">
                             <span class="w-2 h-2 rounded-full bg-emerald-500 mr-3 animate-ping"></span>
-                            <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">Disponible pour consultation</span>
+                            <span class="font-mono text-xs text-adaptive tracking-wider uppercase font-medium">{{ t('cta.tag') }}</span>
                         </div>
                         <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-medium mb-6 text-adaptive leading-[1.1]">
-                            Prêt à <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-500">transformer</span> votre vision ?
+                            {{ t('cta.title_part1') }} <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-500">{{ t('cta.title_part2') }}</span> {{ t('cta.title_part3') }}
                         </h2>
                         <!-- Ajout de la gestion et du développement de la visibilité du projet -->
                         <p class="font-sans text-adaptive-muted text-lg font-light mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                            Qu'il s'agisse d'intégrer l'Intelligence Artificielle, de sécuriser vos infrastructures, d'assurer la <strong class="text-adaptive font-medium">gestion globale de votre projet</strong> ou d'en développer la <strong class="text-adaptive font-medium">visibilité 360°</strong>, faisons équipe pour créer une solution sur mesure, résiliente et innovante.
+                            {{ t('cta.desc') | safe }}
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid !px-8 !py-4 shadow-[0_0_30px_rgba(59,130,246,0.3)] hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] !text-base transition-all">
-                                Démarrer un projet <i class="fas fa-arrow-right ml-2"></i>
+                                {{ t('cta.btn') }} <i class="fas fa-arrow-right ml-2"></i>
                             </a>
                         </div>
                     </div>
@@ -595,8 +592,8 @@
                                         <i class="fas fa-calendar-check text-lg"></i>
                                     </div>
                                     <div class="text-left">
-                                        <p class="text-white font-medium text-sm md:text-base">Consultation Privée</p>
-                                        <p class="text-white/70 text-xs font-mono mt-1">Réservez un créneau</p>
+                                        <p class="text-white font-medium text-sm md:text-base">{{ t('cta.consultation') }}</p>
+                                        <p class="text-white/70 text-xs font-mono mt-1">{{ t('cta.consultation_desc') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -613,8 +610,8 @@
             <section id="realisations" class="relative py-32 w-full px-6 md:px-12 max-w-7xl mx-auto border-t border-[var(--glass-border)]">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gs-reveal">
                     <div>
-                        <h2 class="font-display text-4xl md:text-5xl font-medium text-adaptive mb-4">Réalisations & <br><span class="text-adaptive-muted">Écosystèmes.</span></h2>
-                        <p class="font-sans text-adaptive-muted font-light max-w-xl">Une sélection des plateformes, écosystèmes et applications développés ou gérés à travers l'Afrique et le monde.</p>
+                        <h2 class="font-display text-4xl md:text-5xl font-medium text-adaptive mb-4">{{ t('realisations.title') }} <br><span class="text-adaptive-muted">{{ t('realisations.title_light') }}</span></h2>
+                        <p class="font-sans text-adaptive-muted font-light max-w-xl">{{ t('realisations.desc') }}</p>
                     </div>
                 </div>
 
@@ -644,20 +641,20 @@
 
             <!-- FOOTER -->
             <footer class="relative mt-20 pb-10 px-6 max-w-7xl mx-auto gs-reveal">
-                <div class="glass-premium p-12 md:p-20 rounded-[40px] text-center flex flex-col items-center relative overflow-hidden">
+                <div class="glass-premium p-6 md:p-20 rounded-[40px] text-center flex flex-col items-center relative overflow-hidden">
 
                     <div class="relative z-10 w-full">
-                        <h2 class="font-display text-4xl md:text-6xl font-medium mb-10 text-adaptive">
-                            Une idée ? Un projet ?<br>
-                            <span class="text-adaptive-muted">Discutons-en.</span>
+                        <h2 class="font-display text-xl md:text-6xl font-medium mb-6 md:mb-10 text-adaptive">
+                            {{ t('footer.title') }}<br>
+                            <span class="text-adaptive-muted">{{ t('footer.title_light') }}</span>
                         </h2>
 
                         <!-- NOUVELLES ACTIONS : 2 Boutons -->
                         <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full mb-12">
-                            <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid !px-8 !py-4 !text-lg shadow-lg w-full sm:w-auto">
-                                <i class="fas fa-calendar-check mr-2"></i> Consultation gratuite
+                            <a href="https://tidycal.com/moamyoneart" target="_blank" rel="noopener noreferrer" class="btn-solid !px-6 !py-3 md:!px-8 md:!py-4 !text-sm md:!text-lg shadow-lg w-full sm:w-auto">
+                                <i class="fas fa-calendar-check mr-2"></i> {{ t('footer.btn_consultation') }}
                             </a>
-                            <a href="mailto:{{ settings.get('email', 'hello@aisancekalonji.com') }}" class="btn-glass !px-8 !py-4 !text-lg backdrop-blur-md w-full sm:w-auto">
+                            <a href="mailto:{{ settings.get('email', 'hello@aisancekalonji.com') }}" class="btn-glass !px-6 !py-3 md:!px-8 md:!py-4 !text-sm md:!text-lg backdrop-blur-md w-full sm:w-auto">
                                 <i class="fas fa-envelope mr-2"></i> {{ settings.get('email', 'hello@aisancekalonji.com') }}
                             </a>
                         </div>
