@@ -42,16 +42,35 @@
     "subtitle": "Des solutions complètes allant de la sécurisation des infrastructures à la création d'agents autonomes, en passant par le design d'interfaces.",
     "ai_data_title": "Intelligence Artificielle & Data",
     "ai_data_desc": "Intégration de modèles LLM, conception d'architectures RAG et développement d'agents IA autonomes. Optimisation des processus métiers via des automatisations No-Code et des algorithmes Python. Prise de décision basée sur des métriques (Data-driven).",
-    "ai_tags": ["LLM / RAG", "Agents Autonomes", "No-Code", "Data-driven"],
+    "ai_tags": [
+      "LLM / RAG",
+      "Agents Autonomes",
+      "No-Code",
+      "Data-driven"
+    ],
     "cyber_cloud_title": "Cyber & Cloud",
     "cyber_cloud_desc": "Audits de sécurité, hygiène numérique en entreprise, OSINT (recherche de sources ouvertes) et maîtrise des infrastructures cloud.",
-    "cyber_tags": ["AWS CLF-C02", "Hygiène Num.", "ISO 9001:2015"],
+    "cyber_tags": [
+      "AWS CLF-C02",
+      "Hygiène Num.",
+      "ISO 9001:2015"
+    ],
     "fullstack_design_title": "Fullstack & Design Web",
     "fullstack_design_desc": "Architecture web/mobile, identité visuelle, UI/UX, plateformes e-commerce et visualisation 3D.",
-    "fullstack_tags": ["UI / UX Design", "Python/Flask", "Tailwind", "E-commerce"],
+    "fullstack_tags": [
+      "UI / UX Design",
+      "Python/Flask",
+      "Tailwind",
+      "E-commerce"
+    ],
     "strategy_title": "Stratégie 360°, Marketing & Direction",
     "strategy_desc": "Gestion de projets NTIC, intégration domotique, SEO, Google Search Console, et prospection B2B. Direction d'agence (MOA), accompagnement de startups en incubateur et formation.",
-    "strategy_tags": ["SEO & Ads", "Prospection", "Domotique", "Formation"]
+    "strategy_tags": [
+      "SEO & Ads",
+      "Prospection",
+      "Domotique",
+      "Formation"
+    ]
   },
   "footer": {
     "title": "Une idée ? Un projet ?",
@@ -64,5 +83,68 @@
     "legal_title": "Légal",
     "rights": "Tous droits réservés.",
     "made_with": "Fait avec ☕️ et ❤️ Par InnovLab."
+  },
+  "vade_mecum": {
+    "book_publication": "Livre / Publication",
+    "title": "Le Vade-mecum de la sécurité numérique",
+    "description": "Un guide essentiel et pratique conçu pour démystifier l'hygiène numérique. À travers cet ouvrage, je partage des stratégies concrètes et des protocoles de sécurité pour protéger les actifs digitaux des entreprises et des particuliers face aux menaces modernes.",
+    "point_1": "Audit de sécurité personnelle et professionnelle.",
+    "point_2": "Mise en place de bonnes pratiques d'hygiène numérique.",
+    "point_3": "Prévention active contre le social engineering.",
+    "btn_copy": "Obtenir mon exemplaire"
+  },
+  "experiences": {
+    "title": "Parcours &",
+    "title_light": "Expériences.",
+    "cyber_date": "Déc 2025 - Présent",
+    "cyber_tag": "Cybersécurité",
+    "cyber_title": "LaCyberConfiance",
+    "cyber_role": "Fondateur",
+    "cyber_desc": "Direction de la plateforme de sensibilisation. Création du Vade-mecum de LaCyberConfiance, réalisation d'audits cyber et R&D d'outils d'IA pour la détection de menaces.",
+    "rd_date": "Oct 2025 - Présent",
+    "rd_tag": "R&D & Incubateur",
+    "rd_title": "Shabaka InnovLab",
+    "rd_role": "Chargé des projets NTIC & Associé VP",
+    "rd_desc": "Co-pilotage d'incubateur tech, conception de solutions NTIC et développement d'outils d'automatisation internes propulsés par l'Intelligence Artificielle.",
+    "ai_date": "Nov 2024 - Juil 2025",
+    "ai_tag": "IA & Auto",
+    "ai_title": "IAWEB.DEV",
+    "ai_role": "Responsable Dpt. IA & Automatisation",
+    "ai_desc": "Développement et supervision de l'automatisation des processus internes et externes. Optimisation de la productivité via des solutions no-code et des agents IA.",
+    "strategy_date": "Sep 2022 - Présent",
+    "strategy_tag": "Stratégie 360°",
+    "strategy_title": "MOA Digital Agency",
+    "strategy_role": "PDG & Directeur Général",
+    "strategy_desc": "Gestion des opérations et stratégies 360°. Intégration domotique et développement numérique pour divers clients (Al Destino, Yono Group, Na'Palais). Projets nominés au COPA Kinshasa.",
+    "it_date": "Fév 2019 - Sep 2022",
+    "it_tag": "IT & Sécurité",
+    "it_title": "Henry Cath Marrakech",
+    "it_role": "Responsable S.I. et Marketing",
+    "it_desc": "Maintenance des infrastructures IT, cybersécurité, vidéosurveillance et gestion complète de la plateforme web. Élaboration des stratégies de réseaux sociaux et photographie de produits.",
+    "sales_date": "Déc 2017 - Juin 2018",
+    "sales_tag": "Ventes",
+    "sales_title": "Domotique Maison Maroc",
+    "sales_role": "Directeur des Ventes et Marketing",
+    "sales_desc": "Mise en place de stratégies marketing, prospection commerciale active et soutien technique pour des solutions de domotique résidentielle.",
+    "impact_date": "En continu",
+    "impact_tag": "Impact Social",
+    "impact_title": "Initiatives Sociales & Impact",
+    "impact_role": "Mentor & Initiateur de projets",
+    "impact_desc": "Développement de plateformes à fort impact communautaire telles que « J'ai besoin d'aide » et « Escape with Locals ». Engagement dans la formation et l'accompagnement de la jeunesse (Certification Injaz Al Maghrib - Steer Your Career)."
+  },
+  "cta": {
+    "tag": "Disponible pour consultation",
+    "title_part1": "Prêt à",
+    "title_part2": "transformer",
+    "title_part3": "votre vision ?",
+    "desc": "Qu'il s'agisse d'intégrer l'Intelligence Artificielle, de sécuriser vos infrastructures, d'assurer la <strong>gestion globale de votre projet</strong> ou d'en développer la <strong>visibilité 360°</strong>, faisons équipe pour créer une solution sur mesure, résiliente et innovante.",
+    "btn": "Démarrer un projet",
+    "consultation": "Consultation Privée",
+    "consultation_desc": "Réservez un créneau"
+  },
+  "realisations": {
+    "title": "Réalisations &",
+    "title_light": "Écosystèmes.",
+    "desc": "Une sélection des plateformes, écosystèmes et applications développés ou gérés à travers l'Afrique et le monde."
   }
 }
